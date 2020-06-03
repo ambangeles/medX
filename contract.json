@@ -1,0 +1,198 @@
+[
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_patientId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_medicalHistoryId",
+				"type": "string"
+			}
+		],
+		"name": "getMedicalHistory",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_patientId",
+				"type": "string"
+			}
+		],
+		"name": "totalRecord",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_patientId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_recordId",
+				"type": "string"
+			}
+		],
+		"name": "getRecord",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_patientId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_recordId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_record",
+				"type": "string"
+			}
+		],
+		"name": "insertRecord",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_patientId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_medicalHistoryId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_medicalHistory",
+				"type": "string"
+			}
+		],
+		"name": "insertMedicalHistory",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_patientId",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_dataIndex",
+				"type": "uint256"
+			}
+		],
+		"name": "getMedicalHistoryId",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_patientId",
+				"type": "string"
+			}
+		],
+		"name": "totalMedHis",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_patientId",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_dataIndex",
+				"type": "uint256"
+			}
+		],
+		"name": "getRecordId",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]

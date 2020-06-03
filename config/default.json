@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb+srv://admin:admin@medx-71yba.gcp.mongodb.net/medX?retryWrites=true&w=majority",
+  "jwtSecret": "medXAuth",
+  "jwtSecretAccess": "medXAccess",
+  "jwtSecretPass": "medXPass"
+}

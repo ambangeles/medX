@@ -1,0 +1,530 @@
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+.jumbotronH {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  width: 50%;
+  height: 1000px;
+  margin-left: 20px;
+}
+
+.jumbotronL {
+  width: 78%;
+  margin-right: 150px;
+  height: 300px;
+  float: right;
+}
+
+.navhome {
+  height: 400px;
+}
+
+.navprofile {
+  position: initial;
+  height: 500px;
+  padding: 0em;
+}
+
+.navprofile4 {
+  width: 100%;
+  background-color: rgb(242, 242, 242);
+  border-radius: 1em;
+  float: left;
+  position: relative;
+  margin-top: 15px;
+}
+
+.jumbotronP1 {
+  margin: 20px;
+  width: 90%;
+  height: 150px;
+  background-color: lavenderblush;
+}
+.jumbotronP3 {
+  float: left;
+  size: "3x";
+}
+
+.jumbotronP2 {
+  width: 70%;
+  margin-right: 130px;
+  height: 300px;
+  float: right;
+}
+
+.buttonP2 {
+  margin-left: 20px;
+  width: 225px;
+}
+
+.buttondash {
+  margin-bottom: 25px;
+  border-radius: 120px !important;
+}
+
+.searchbar {
+  display: flex;
+  justify-content: center;
+}
+
+.margin-20 {
+  margin: 20px;
+}
+.margin-10 {
+  margin-left: 30px;
+  margin-bottom: 10px;
+  margin-right: 35px;
+}
+.container1 {
+  float: right;
+  position: relative;
+  height: inherit;
+  width: inherit;
+  margin-top: 15px;
+  border-radius: 1em;
+  background-color: rgb(242, 242, 242);
+}
+
+@media (min-width: 1000px) {
+  .displayimg {
+    float: right;
+  }
+
+  .display {
+    float: left;
+    margin-top: 40px;
+  }
+}
+
+.displayimg {
+  display: flex;
+  justify-content: center;
+}
+
+.display {
+  display: flex;
+  justify-content: center;
+}
+
+.container2 {
+  margin-top: 15px;
+  border-radius: 1em;
+  height: 545px;
+  background-color: rgb(242, 242, 242);
+}
+
+.floater-right1 {
+  float: right;
+  margin: 15px;
+}
+.floater-left1 {
+  float: left;
+  margin: 15px;
+}
+
+.containera {
+  height: 600px;
+}
+.margin-15 {
+  margin: 15px;
+  float: left;
+}
+.margin-100 {
+  height: 500px;
+  margin-top: 150px;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.margin-0 {
+  margin-top: 10px;
+  margin-left: 130px;
+  margin-right: 130px;
+}
+
+.fixedright1 {
+  float: right;
+}
+
+.fixedleft1 {
+  float: left;
+}
+
+.patient {
+  margin-top: 150px;
+  height: 500px;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+.bottom {
+  margin-right: 100px;
+  margin-left: 100px;
+  margin-bottom: 250px;
+}
+.border {
+  margin-right: 100px;
+  margin-left: 100px;
+}
+.primary {
+  border-radius: 20em;
+}
+
+.shadowOffset {
+  height: 100px;
+  background-color: black;
+  opacity: 100px;
+}
+.ebutton {
+  border-radius: 2em;
+  margin-top: 10px;
+}
+.modalbutton1 {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+}
+.modal-90w {
+  width: 90%;
+}
+.img1 {
+  height: 30px;
+}
+.img2 {
+  width: 200px;
+}
+
+.searchimg {
+  display: flex;
+  justify-content: center;
+}
+.allign {
+  border-top: 13em;
+  margin-top: 0.5em;
+}
+.modalborder {
+  border-radius: 2em;
+}
+
+.medic2 {
+  height: max-content;
+  min-height: 150px;
+  width: 100%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.medic1 {
+  height: 200px;
+  width: 100%;
+  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+.medhis {
+  height: 530px;
+  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+.practitioner {
+  height: 290px;
+  width: 100%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+.permis {
+  height: 465px;
+  width: 100%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+.scrolls {
+  height: 300px;
+  width: 100%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+.notify {
+  width: 300px;
+  min-height: 50px;
+}
+.height {
+  display: -ms-flexbox;
+  position: relative;
+}
+.popover {
+  min-width: 350px !important;
+  min-height: 200px;
+  background-color: rgb(242, 242, 242);
+}
+.containerp {
+  margin-top: 5px;
+  min-height: 100px;
+  min-width: inherit;
+  background-color: white;
+  border-radius: 1em;
+}
+
+.marginFooter {
+  margin-top: 3000px;
+  height: 74%;
+  text-align: center;
+}
+
+@media (min-width: 992px) {
+  .marginFooter {
+    margin-top: 2300px;
+    height: 40%;
+  }
+}
+
+@media (min-width: 1140px) {
+  .marginFooter {
+    margin-top: 2300px;
+    height: 35%;
+  }
+}
+
+@media (min-width: 768px) {
+  .marginPrint {
+    display: flex;
+    align-items: flex-end;
+  }
+}
+
+@media (max-width: 992px) {
+  .marginLeftFooter {
+    margin-left: 25%;
+  }
+}
+
+@media (min-width: 768px) {
+  .notifdrop {
+    height: 400px;
+    width: 550px;
+    padding: 0em;
+    margin: 0em;
+    background-color: rgb(242, 242, 242);
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+}
+
+@media (min-width: 775px) {
+  .searchbarsize {
+    width: 500px;
+  }
+}
+
+@media (min-width: 768px) {
+  .pmbutton {
+    margin-left: 35px;
+  }
+}
+
+.notifdrop {
+  height: 400px;
+  padding: 0em;
+  margin: 0em;
+  background-color: rgb(242, 242, 242);
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.toast {
+  min-width: 270px;
+  margin-left: -2em;
+  margin-top: -1em;
+}
+
+input[type="search"] {
+  background-color: rgba(242, 242, 242);
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+  min-width: 600px;
+}
+.menudrop {
+  width: 50px;
+}
+input[type="remarks"] {
+  max-width: 50%;
+  float: right;
+  height: 80%;
+}
+.floaterleft11 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  float: left;
+}
+.floaterright11 {
+  margin-top: 0.5em;
+  float: left;
+  width: 50%;
+}
+
+.pastill {
+  background-color: rgb(242, 242, 242);
+  margin-bottom: 2em;
+  border-radius: 1em;
+  color: black;
+  padding: 10px 10px !important;
+}
+.div1 {
+  background-color: white;
+  min-height: 190px;
+  max-height: fit-content;
+  margin-bottom: 2em;
+  border-radius: 0.5em;
+  color: black;
+}
+.div2 {
+  background-color: rgb(242, 242, 242);
+  min-height: 150px;
+  max-height: fit-content;
+  margin-top: 5px;
+  min-width: 100px;
+  border-radius: 1em;
+  color: black;
+}
+.div3 {
+  background-color: white;
+  margin-top: 10px;
+  min-height: 150px;
+  max-height: max-content;
+  margin-left: 1.5em;
+  min-width: 100px;
+  border-radius: 1em;
+  color: black;
+  vertical-align: middle;
+}
+.blood {
+  margin: 20px;
+}
+
+.bordercol {
+  border-collapse: collapse;
+}
+.bordercolor {
+  border-collapse: collapse !important;
+  border: 1px solid black;
+  word-wrap: break-word;
+}
+.bordercolor1 {
+  border: 1px solid black;
+  margin: 20px;
+  word-wrap: break-word;
+}
+
+.divprint {
+  min-height: 150px;
+  width: 100%;
+}
+.divprint2 {
+  min-height: inherit;
+  width: 100%;
+}
+.divprint1 {
+  min-height: 150px;
+  width: 100%;
+}
+
+@media print {
+  main {
+    page-break-before: always;
+  }
+}
+.paging {
+  page-break-before: always;
+}
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+  overflow: hidden;
+}
+.bordercolor3 {
+  min-height: inherit;
+  margin-left: 50px;
+  word-wrap: break-word;
+}
+.about {
+  margin-right: 100px;
+  margin-top: 40px;
+}
+.img3 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+.img4 {
+  height: auto;
+  width: 100%;
+}
+.img5 {
+  height: 100%;
+  width: 100%;
+}
+.justify {
+  text-align: justify;
+  text-justify: inter-word;
+}
+.rowing {
+  margin-top: 12%;
+  margin-bottom: 15%;
+}
+.margintop {
+  margin-top: 100px;
+  margin-bottom: 50px;
+  margin-left: 10%;
+}
+.containerheight {
+  height: 500px;
+}
+.a50 {
+  width: 50%;
+  height: 500px;
+}
+.cardy {
+  position: fixed;
+  box-shadow: 0.125rem 0.125rem 0.125rem 0.25rem rgba(0.25, 0.25, 0.25, 0.25);
+}
+@media screen {
+  div.divFooter {
+    display: none;
+  }
+}
+@media print {
+  div.divFooter {
+    position: relative;
+    bottom: -75;
+  }
+}
