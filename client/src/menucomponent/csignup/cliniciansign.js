@@ -14,8 +14,7 @@ import {
   PopoverBody
 } from "reactstrap";
 import { FaArrowRight } from "react-icons/fa";
-import { firstStep } from "../../actions/authActions";
-import { Redirect } from "react-router-dom";
+import { firstStepC } from "../../actions/authActions";
 import { connect } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { FaRegAddressCard } from "react-icons/fa";
@@ -79,7 +78,7 @@ export class ClinicianUser extends Component {
       password,
       confirmPassword
     };
-    this.props.firstStep(firstStep);
+    this.props.firstStepC(firstStep);
   };
 
   render() {
@@ -294,4 +293,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { firstStep })(ClinicianUser);
+export default connect(mapStateToProps, { firstStepC })(ClinicianUser);

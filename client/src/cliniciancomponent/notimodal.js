@@ -1,15 +1,5 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Modal,
-  Col,
-  Row,
-  ModalBody,
-  FormGroup,
-  NavLink,
-  ModalFooter,
-  ModalHeader
-} from "reactstrap";
+import { Button, Modal, ModalBody, NavLink } from "reactstrap";
 import { connect } from "react-redux";
 import { getNotiC } from "../actions/authActions";
 import { AiOutlineClose } from "react-icons/ai";

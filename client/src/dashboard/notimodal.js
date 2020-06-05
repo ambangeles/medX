@@ -5,7 +5,6 @@ import {
   Col,
   Row,
   ModalBody,
-  FormGroup,
   NavLink,
   ModalFooter
 } from "reactstrap";

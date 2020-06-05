@@ -9,17 +9,17 @@ class Fmedicalrecords extends React.Component {
         <Container className="bordercolor3">
           <Row className="bordercolor">
             <Col className="center1">
-              <h3>CONSULTATION RECORDS</h3>
+              <h2>CONSULTATION RECORDS</h2>
             </Col>
           </Row>
           <Row className="bordercolor">
             <Col>
-              <h6>Physical Examination Findings</h6>
+              <b>Physical Examination Findings</b>
             </Col>
           </Row>
           <Row>
             <Col className="bordercolor" lg="2">
-              <h6>Vital Signs</h6>
+              <b>Vital Signs</b>
             </Col>
             <Col className="bordercolor" lg="5">
               <Col>
@@ -35,7 +35,9 @@ class Fmedicalrecords extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col className="bordercolor">Physical Examination</Col>
+            <Col className="bordercolor">
+              <b>Physical Examination</b>
+            </Col>
             <Col className="bordercolor" lg="10">
               <Row>
                 <Col className="bordercolor" lg="6">
@@ -82,7 +84,9 @@ class Fmedicalrecords extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col className="bordercolor">Laboratory Workups</Col>
+            <Col className="bordercolor">
+              <b>Laboratory Workups</b>
+            </Col>
             <Col className="bordercolor" lg="10">
               <Row>
                 <Col className="bordercolor" lg="6">
@@ -162,7 +166,7 @@ class Fmedicalrecords extends React.Component {
           </Row>
           <Row className="bordercolor">
             <Col>
-              <h6>Complaints</h6>
+              <b>Complaints</b>
             </Col>
           </Row>
           <Row className="bordercolor">
@@ -172,7 +176,7 @@ class Fmedicalrecords extends React.Component {
           </Row>
           <Row className="bordercolor">
             <Col>
-              <h6>Diagnosis</h6>
+              <b>Diagnosis</b>
             </Col>
           </Row>
           <Row className="bordercolor">
@@ -180,7 +184,7 @@ class Fmedicalrecords extends React.Component {
           </Row>
           <Row className="bordercolor">
             <Col>
-              <h6>Treatment</h6>
+              <b>Treatment</b>
             </Col>
           </Row>
           <Row className="bordercolor">
@@ -188,7 +192,7 @@ class Fmedicalrecords extends React.Component {
           </Row>
           <Row className="bordercolor">
             <Col>
-              <h6>Remarks</h6>
+              <b>Remarks</b>
             </Col>
           </Row>
           <Row className="bordercolor">

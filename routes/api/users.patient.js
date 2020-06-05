@@ -2,12 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const auth = require("../../middleware/auth");
-const {
-  today,
-  getAge,
-  getMonth,
-  capitalize
-} = require("../../middleware/date");
+const { today, capitalize } = require("../../middleware/date");
 const {
   setupValidation,
   editInfoValidation,
@@ -216,11 +211,6 @@ router.post("/setup", auth, (req, res) => {
   const { error } = setupValidation(req.body);
   if (error) {
     return res.status(400).json({ msg: error.details[0].message });
-  } else if (
-    req.body.contactNumber.length !== 11 ||
-    req.body.guardianContactNo.length !== 11
-  ) {
-    return res.status(400).json({ msg: "Contact Number must be 11 digits" });
   }
 
   Patient.findById(req.user.id).then((patient) => {
@@ -238,8 +228,6 @@ router.post("/setup", auth, (req, res) => {
   });
 });
 
-//END OF NEW API
-
 //Get all activity logs
 router.get("/userLogs", auth, (req, res) => {
   Patient.findById(req.user.id)
@@ -253,81 +241,6 @@ router.get("/getNotifications", auth, (req, res) => {
   Patient.findById(req.user.id)
     .select("notifications.notificationLogs")
     .then((patient) => res.json(patient));
-});
-
-//Deny access of clinician
-router.post("/deniedAccess/:id", auth, (req, res) => {
-  Clinician.findById(req.params.id).then((clinician) => {
-    Patient.findByIdAndUpdate(
-      req.user.id,
-      {
-        $push: {
-          activityLogs: {
-            $each: [
-              `Denied ${clinician.firstName} ${
-                clinician.lastName
-              } access at ${today()}`
-            ],
-            $position: 0
-          }
-        }
-      },
-      { safe: true },
-      function (err, doc) {
-        if (err) {
-          console.log(err);
-        }
-      }
-    );
-    Patient.findById(req.user.id).then((patient) => {
-      Clinician.findByIdAndUpdate(
-        req.params.id,
-        {
-          $push: {
-            notificationLogs: {
-              $each: [
-                `Your request to access ${patient.firstName} ${
-                  patient.lastName
-                }'s medical records has been denied at ${today()}`
-              ],
-              $position: 0
-            }
-          }
-        },
-        { safe: true, upsert: false },
-        function (err, doc) {
-          if (err) {
-            console.log(err);
-          }
-        }
-      );
-    });
-    Patient.findById(req.user.id).then((patient) => {
-      Clinician.findByIdAndUpdate(
-        req.params.id,
-        {
-          $push: {
-            activityLogs: {
-              $each: [
-                `Your request to access ${patient.firstName} ${
-                  patient.lastName
-                }'s medical records has been denied at ${today()}`
-              ],
-              $position: 0
-            }
-          }
-        },
-        { safe: true, upsert: false },
-        function (err, doc) {
-          if (err) {
-            console.log(err);
-          }
-        }
-      );
-    });
-  });
-
-  res.json("Access denied");
 });
 
 module.exports = router;

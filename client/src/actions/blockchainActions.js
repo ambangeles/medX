@@ -652,8 +652,6 @@ export const accept = (clinicianId, duration, id) => (dispatch, getState) => {
     });
 };
 
-//END
-
 export const deleteRecords = (record) => (dispatch, getState) => {
   dispatch({
     type: DELETE_SUCCESS

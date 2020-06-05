@@ -117,7 +117,7 @@ class Permission extends React.Component {
               {permissions.map((permission) => (
                 <Row key={permission._id} className="containerp">
                   <Col md="4" style={{ marginTop: "10px" }}>
-                    <span className="dataDesign">{permission.name}</span>
+                    <b>{permission.name}</b>
                     <br />
                     {permission.occupation}
                     <br />
@@ -132,114 +132,81 @@ class Permission extends React.Component {
                     }}
                   >
                     <Row>
-                      {this.state.permissions[
-                        this.state.permissions.findIndex(
-                          (test) => test._id === permission._id
-                        )
-                      ].canView ? (
-                        <Col md="4">
-                          <Input
-                            type="checkbox"
-                            defaultValue={
-                              permissions[
-                                permissions.findIndex(
-                                  (test) => test._id === permission._id
-                                )
-                              ].canView
-                            }
-                            onChange={this.canView.bind(this, permission._id)}
-                            checked
-                          />
-                          Can view
-                        </Col>
-                      ) : (
-                        <Col md="4">
-                          <Input
-                            type="checkbox"
-                            defaultValue={
-                              permissions[
-                                permissions.findIndex(
-                                  (test) => test._id === permission._id
-                                )
-                              ].canView
-                            }
-                            onChange={this.canView.bind(this, permission._id)}
-                          />
-                          Can view
-                        </Col>
-                      )}
-                      {this.state.permissions[
-                        this.state.permissions.findIndex(
-                          (test) => test._id === permission._id
-                        )
-                      ].canPrint ? (
-                        <Col md="4">
-                          <Input
-                            type="checkbox"
-                            defaultValue={
-                              permissions[
-                                permissions.findIndex(
-                                  (test) => test._id === permission._id
-                                )
-                              ].canPrint
-                            }
-                            onChange={this.canPrint.bind(this, permission._id)}
-                            checked
-                          />
-                          Can print
-                        </Col>
-                      ) : (
-                        <Col md="4">
-                          <Input
-                            type="checkbox"
-                            defaultValue={
-                              permissions[
-                                permissions.findIndex(
-                                  (test) => test._id === permission._id
-                                )
-                              ].canPrint
-                            }
-                            onChange={this.canPrint.bind(this, permission._id)}
-                          />
-                          Can print
-                        </Col>
-                      )}
-                      {this.state.permissions[
-                        this.state.permissions.findIndex(
-                          (test) => test._id === permission._id
-                        )
-                      ].canInsert ? (
-                        <Col md="4">
-                          <Input
-                            type="checkbox"
-                            defaultValue={
-                              permissions[
-                                permissions.findIndex(
-                                  (test) => test._id === permission._id
-                                )
-                              ].canInsert
-                            }
-                            onChange={this.canInsert.bind(this, permission._id)}
-                            checked
-                          />
-                          Can insert
-                        </Col>
-                      ) : (
-                        <Col md="4">
-                          <Input
-                            type="checkbox"
-                            defaultValue={
-                              permissions[
-                                permissions.findIndex(
-                                  (test) => test._id === permission._id
-                                )
-                              ].canInsert
-                            }
-                            onChange={this.canInsert.bind(this, permission._id)}
-                          />
-                          Can insert
-                        </Col>
-                      )}
+                      <Col md="4">
+                        <Input
+                          type="checkbox"
+                          defaultValue={
+                            permissions[
+                              permissions.findIndex(
+                                (test) => test._id === permission._id
+                              )
+                            ].canView
+                          }
+                          onChange={this.canView.bind(this, permission._id)}
+                          checked={
+                            this.state.permissions[
+                              this.state.permissions.findIndex(
+                                (test) => test._id === permission._id
+                              )
+                            ].canView
+                          }
+                        />
+                        Can view
+                      </Col>
+
+                      <Col md="4">
+                        <Input
+                          type="checkbox"
+                          defaultValue={
+                            permissions[
+                              permissions.findIndex(
+                                (test) => test._id === permission._id
+                              )
+                            ].canPrint
+                          }
+                          onChange={this.canPrint.bind(this, permission._id)}
+                          checked={
+                            this.state.permissions[
+                              this.state.permissions.findIndex(
+                                (test) => test._id === permission._id
+                              )
+                            ].canPrint &&
+                            this.state.permissions[
+                              this.state.permissions.findIndex(
+                                (test) => test._id === permission._id
+                              )
+                            ].canView
+                          }
+                        />
+                        Can print
+                      </Col>
+
+                      <Col md="4">
+                        <Input
+                          type="checkbox"
+                          defaultValue={
+                            permissions[
+                              permissions.findIndex(
+                                (test) => test._id === permission._id
+                              )
+                            ].canInsert
+                          }
+                          onChange={this.canInsert.bind(this, permission._id)}
+                          checked={
+                            this.state.permissions[
+                              this.state.permissions.findIndex(
+                                (test) => test._id === permission._id
+                              )
+                            ].canInsert &&
+                            this.state.permissions[
+                              this.state.permissions.findIndex(
+                                (test) => test._id === permission._id
+                              )
+                            ].canView
+                          }
+                        />
+                        Can insert
+                      </Col>
                     </Row>
                   </Col>
                 </Row>

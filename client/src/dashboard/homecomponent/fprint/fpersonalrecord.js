@@ -8,7 +8,7 @@ class Fpersonalrecord extends React.Component {
         <Container className="bordercolor3">
           <Row className="bordercolor">
             <Col className="center1">
-              <h3>PERSONAL INFORMATION</h3>
+              <h2>PERSONAL INFORMATION</h2>
             </Col>
           </Row>
           <Row>
@@ -49,7 +49,9 @@ class Fpersonalrecord extends React.Component {
           </Row>
           <Row>
             <Col className="bordercolor">
-              <h6>IN CASE OF EMERGENCY</h6>
+              <h5>
+                <b>IN CASE OF EMERGENCY</b>
+              </h5>
             </Col>
           </Row>
           <Row>

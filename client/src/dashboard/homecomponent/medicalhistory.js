@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Row, Col, Container, Label, Table } from "reactstrap";
+import { Row, Col, Container, Label } from "reactstrap";
 import { connect } from "react-redux";
 
 class Medicalhistory extends React.Component {
@@ -381,7 +381,13 @@ class Medicalhistory extends React.Component {
                             >
                               <span className="dataDesign">{name}</span>
                             </Col>
-                            <Col md={2} style={{ wordBreak: "break-word" }}>
+                            <Col
+                              md={2}
+                              style={{
+                                wordBreak: "break-word",
+                                margin: "3px 3px"
+                              }}
+                            >
                               <Row>OD</Row>
                               <Row>
                                 <div className="rmDesign">
@@ -389,7 +395,13 @@ class Medicalhistory extends React.Component {
                                 </div>
                               </Row>
                             </Col>
-                            <Col md={2} style={{ wordBreak: "break-word" }}>
+                            <Col
+                              md={2}
+                              style={{
+                                wordBreak: "break-word",
+                                margin: "3px 3px"
+                              }}
+                            >
                               <Row>OS</Row>
                               <Row>
                                 <div className="rmDesign">
@@ -397,7 +409,13 @@ class Medicalhistory extends React.Component {
                                 </div>
                               </Row>
                             </Col>
-                            <Col md={2} style={{ wordBreak: "break-word" }}>
+                            <Col
+                              md={2}
+                              style={{
+                                wordBreak: "break-word",
+                                margin: "3px 3px"
+                              }}
+                            >
                               <Row>Date</Row>
                               <Row>
                                 <div className="rmDesign">

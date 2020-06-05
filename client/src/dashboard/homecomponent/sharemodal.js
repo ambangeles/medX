@@ -45,9 +45,8 @@ class Share extends Component {
   }
 
   toggle1 = () => {
-    this.setState({ modal: !this.state.modal });
+    this.setState({ modal: !this.state.modal, expiration: "" });
     this.props.clearErrors();
-    this.setState({ expiration: "" });
   };
 
   canView = () => {

@@ -13,7 +13,12 @@ class App extends Component {
 
   render() {
     const { isAuthenticated, patient, clinician, isLoading } = this.props.auth;
-
+    if (
+      this.props.auth.msg === "LOGOUT_SUCCESS" ||
+      this.props.error.msg === "INVALID_TOKEN"
+    ) {
+      window.location.assign("/login");
+    }
     if (isLoading) {
       return <Fragment></Fragment>;
     }
@@ -31,8 +36,10 @@ class App extends Component {
     );
   }
 }
+
 const mapStateToProps = (state) => ({
-  auth: state.auth
+  auth: state.auth,
+  error: state.error
 });
 
 export default connect(mapStateToProps)(App);

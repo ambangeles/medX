@@ -93,9 +93,11 @@ class Request extends React.Component {
     return (
       <div style={{ backgroundColor: "white" }}>
         <tr className="row">
-          <td className="col dataDesign">
-            {this.props.search.firstName} {this.props.search.middleName}{" "}
-            {this.props.search.lastName}
+          <td className="col">
+            <b>
+              {this.props.search.firstName} {this.props.search.middleName}{" "}
+              {this.props.search.lastName}
+            </b>
           </td>
           <td className="col">
             {this.props.auth.clinician.isRequested.some(
@@ -188,7 +190,7 @@ class Request extends React.Component {
                               Reason
                             </option>
                             <option>For your consultation </option>
-                            <option>For reasearch purposes</option>
+                            <option>For research purposes</option>
                           </Input>
                         </Col>
                         <Col xs="3">

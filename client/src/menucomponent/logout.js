@@ -5,11 +5,7 @@ import { logout } from "../actions/authActions";
 
 export class Logout extends Component {
   render() {
-    return (
-      <NavLink onClick={this.props.logout} href="/">
-        Log Out
-      </NavLink>
-    );
+    return <NavLink onClick={this.props.logout}>Log Out</NavLink>;
   }
 }
 

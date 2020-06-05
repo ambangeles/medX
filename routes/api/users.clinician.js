@@ -1,23 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
-const config = require("config");
-const jwt = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
 const auth = require("../../middleware/auth");
-const {
-  today,
-  getAge,
-  getMonth,
-  capitalize
-} = require("../../middleware/date");
+const { today } = require("../../middleware/date");
 const {
   editInfoCValidation,
   passwordValidation
 } = require("../../middleware/validator");
 // User Model
 const Clinician = require("../../models/User.clinician");
-const Patient = require("../../models/User.patient");
 
 //Update password of patient
 router.post("/update/password", auth, (req, res) => {

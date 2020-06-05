@@ -163,15 +163,13 @@ class Fprint extends React.Component {
                       <Col xs="4" className="bordercolor">
                         {pastIllness.name}
                       </Col>
-                      <Col className="bordercolor">
-                        <Label>
-                          Remarks:{" "}
-                          {pastIllness.remarks === "" ? (
-                            <Fragment>None</Fragment>
-                          ) : (
-                            pastIllness.remarks
-                          )}
-                        </Label>
+                      <Col xs="8" className="bordercolor">
+                        Remarks:{" "}
+                        {pastIllness.remarks === "" ? (
+                          <Fragment>None</Fragment>
+                        ) : (
+                          pastIllness.remarks
+                        )}
                       </Col>
                     </Row>
                   ))}
@@ -180,15 +178,13 @@ class Fprint extends React.Component {
                       <Col xs="4" className="bordercolor">
                         {famIllness.name}
                       </Col>
-                      <Col className="bordercolor">
-                        <Label>
-                          Remarks:{" "}
-                          {famIllness.remarks === "" ? (
-                            <Fragment>None</Fragment>
-                          ) : (
-                            famIllness.remarks
-                          )}
-                        </Label>
+                      <Col xs="8" className="bordercolor">
+                        Remarks:{" "}
+                        {famIllness.remarks === "" ? (
+                          <Fragment>None</Fragment>
+                        ) : (
+                          famIllness.remarks
+                        )}
                       </Col>
                     </Row>
                   ))}
@@ -197,10 +193,7 @@ class Fprint extends React.Component {
                   bloodType={this.state.bloodType}
                   immunization={this.state.immunization.map((immunization) => (
                     <Row>
-                      <Col xs="4" className="bordercolor">
-                        {immunization.name}
-                      </Col>{" "}
-                      <Col className="bordercolor"></Col>
+                      <Col className="bordercolor">{immunization.name}</Col>
                     </Row>
                   ))}
                   hospitalizations={this.state.hospitalizations.map(
@@ -225,15 +218,13 @@ class Fprint extends React.Component {
                       <Col xs="4" className="bordercolor">
                         {allergies.name}
                       </Col>
-                      <Col className="bordercolor">
-                        <Label>
-                          Remarks:{" "}
-                          {allergies.remarks === "" ? (
-                            <Fragment>None</Fragment>
-                          ) : (
-                            allergies.remarks
-                          )}
-                        </Label>
+                      <Col xs="8" className="bordercolor">
+                        Remarks:{" "}
+                        {allergies.remarks === "" ? (
+                          <Fragment>None</Fragment>
+                        ) : (
+                          allergies.remarks
+                        )}
                       </Col>
                     </Row>
                   ))}
@@ -242,15 +233,13 @@ class Fprint extends React.Component {
                       <Col xs="4" className="bordercolor">
                         {bodyArt.name}
                       </Col>
-                      <Col className="bordercolor">
-                        <Label>
-                          Remarks:{" "}
-                          {bodyArt.remarks === "" ? (
-                            <Fragment>None</Fragment>
-                          ) : (
-                            bodyArt.remarks
-                          )}
-                        </Label>
+                      <Col xs="8" className="bordercolor">
+                        Remarks:{" "}
+                        {bodyArt.remarks === "" ? (
+                          <Fragment>None</Fragment>
+                        ) : (
+                          bodyArt.remarks
+                        )}
                       </Col>
                     </Row>
                   ))}
@@ -259,26 +248,28 @@ class Fprint extends React.Component {
                       <Col xs="4" className="bordercolor">
                         {habits.name}
                       </Col>
-                      <Col className="bordercolor">
-                        <Label>
-                          Remarks:{" "}
-                          {habits.remarks === "" ? (
-                            <Fragment>None</Fragment>
-                          ) : (
-                            habits.remarks
-                          )}
-                        </Label>
+                      <Col xs="8" className="bordercolor">
+                        Remarks:{" "}
+                        {habits.remarks === "" ? (
+                          <Fragment>None</Fragment>
+                        ) : (
+                          habits.remarks
+                        )}
                       </Col>
                     </Row>
                   ))}
                   visualAcuity={this.state.visualAcuity.map((visualAcuity) => (
                     <Row>
-                      <Col xs="4" className="bordercolor">
+                      <Col xs="3" className="bordercolor">
                         {visualAcuity.name}
                       </Col>
-                      <Col className="bordercolor">OD: {visualAcuity.od}</Col>
-                      <Col className="bordercolor">OS: {visualAcuity.os}</Col>
-                      <Col className="bordercolor">
+                      <Col xs="3" className="bordercolor">
+                        OD: {visualAcuity.od}
+                      </Col>
+                      <Col xs="3" className="bordercolor">
+                        OS: {visualAcuity.os}
+                      </Col>
+                      <Col xs="3" className="bordercolor">
                         Date {visualAcuity.date}
                       </Col>
                     </Row>
@@ -318,17 +309,25 @@ class Fprint extends React.Component {
                     <main>
                       <Row className="bordercolor">
                         <Col className="center1">
-                          <h3>CONSULTATION RECORDS</h3>
+                          <h2>CONSULTATION RECORDS</h2>
                         </Col>
                       </Row>
                       <Row className="bordercolor">
                         <Col>
-                          <h6>Physical Examination Findings</h6>
+                          <h5>
+                            <b>
+                              <b>Physical Examination Findings</b>
+                            </b>
+                          </h5>{" "}
                         </Col>
                       </Row>
                       <Row>
                         <Col className="bordercolor" xs="2">
-                          <h6>Vital Signs</h6>
+                          <h5>
+                            <b>
+                              <b>Vital Signs</b>
+                            </b>
+                          </h5>{" "}
                         </Col>
                         <Col className="bordercolor" xs="5">
                           <Col>Blood Pressure: {record.bloodPressure}</Col>
@@ -340,7 +339,13 @@ class Fprint extends React.Component {
                         </Col>
                       </Row>
                       <Row>
-                        <Col className="bordercolor">Physical Examination</Col>
+                        <Col className="bordercolor">
+                          <h5>
+                            <b>
+                              <b>Physical Examination</b>
+                            </b>
+                          </h5>
+                        </Col>
                         <Col className="bordercolor" xs="10">
                           <Row>
                             <Col className="bordercolor" xs="6">
@@ -379,7 +384,13 @@ class Fprint extends React.Component {
                         </Col>
                       </Row>
                       <Row>
-                        <Col className="bordercolor">Laboratory Workups</Col>
+                        <Col className="bordercolor">
+                          <h5>
+                            <b>
+                              <b>Laboratory Workups</b>
+                            </b>
+                          </h5>
+                        </Col>
                         <Col className="bordercolor" xs="10">
                           <Row>
                             <Col className="bordercolor" xs="6">
@@ -451,7 +462,11 @@ class Fprint extends React.Component {
                       </Row>
                       <Row className="bordercolor">
                         <Col>
-                          <h6>Complaints</h6>
+                          <h5>
+                            <b>
+                              <b>Complaints</b>
+                            </b>
+                          </h5>
                         </Col>
                       </Row>
                       <Row className="bordercolor">
@@ -459,7 +474,11 @@ class Fprint extends React.Component {
                       </Row>
                       <Row className="bordercolor">
                         <Col>
-                          <h6>Diagnosis</h6>
+                          <h5>
+                            <b>
+                              <b>Diagnosis</b>
+                            </b>
+                          </h5>
                         </Col>
                       </Row>
                       <Row className="bordercolor">
@@ -467,7 +486,11 @@ class Fprint extends React.Component {
                       </Row>
                       <Row className="bordercolor">
                         <Col>
-                          <h6>Treatment</h6>
+                          <h5>
+                            <b>
+                              <b>Treatment</b>
+                            </b>
+                          </h5>
                         </Col>
                       </Row>
                       <Row className="bordercolor">
@@ -475,7 +498,11 @@ class Fprint extends React.Component {
                       </Row>
                       <Row className="bordercolor">
                         <Col>
-                          <h6>Remarks</h6>
+                          <h5>
+                            <b>
+                              <b>Remarks</b>
+                            </b>
+                          </h5>
                         </Col>
                       </Row>
                       <Row className="bordercolor">
@@ -536,17 +563,21 @@ class Fprint extends React.Component {
                     <main>
                       <Row className="bordercolor">
                         <Col className="center1">
-                          <h3>CONSULTATION RECORDS</h3>
+                          <h2>CONSULTATION RECORDS</h2>
                         </Col>
                       </Row>
                       <Row className="bordercolor">
                         <Col>
-                          <h6>Physical Examination Findings</h6>
+                          <h5>
+                            <b>Physical Examination Findings</b>
+                          </h5>
                         </Col>
                       </Row>
                       <Row>
                         <Col className="bordercolor" xs="2">
-                          <h6>Vital Signs</h6>
+                          <h5>
+                            <b>Vital Signs</b>
+                          </h5>
                         </Col>
                         <Col className="bordercolor" xs="5">
                           <Col>Blood Pressure: {record.bloodPressure}</Col>
@@ -558,7 +589,11 @@ class Fprint extends React.Component {
                         </Col>
                       </Row>
                       <Row>
-                        <Col className="bordercolor">Physical Examination</Col>
+                        <Col className="bordercolor">
+                          <h5>
+                            <b>Physical Examination</b>
+                          </h5>
+                        </Col>
                         <Col className="bordercolor" xs="10">
                           <Row>
                             <Col className="bordercolor" xs="6">
@@ -597,7 +632,11 @@ class Fprint extends React.Component {
                         </Col>
                       </Row>
                       <Row>
-                        <Col className="bordercolor">Laboratory Workups</Col>
+                        <Col className="bordercolor">
+                          <h5>
+                            <b>Laboratory Workups</b>
+                          </h5>
+                        </Col>
                         <Col className="bordercolor" xs="10">
                           <Row>
                             <Col className="bordercolor" xs="6">
@@ -669,7 +708,9 @@ class Fprint extends React.Component {
                       </Row>
                       <Row className="bordercolor">
                         <Col>
-                          <h6>Complaints</h6>
+                          <h5>
+                            <b>Complaints</b>
+                          </h5>
                         </Col>
                       </Row>
                       <Row className="bordercolor">
@@ -677,7 +718,9 @@ class Fprint extends React.Component {
                       </Row>
                       <Row className="bordercolor">
                         <Col>
-                          <h6>Diagnosis</h6>
+                          <h5>
+                            <b>Diagnosis</b>
+                          </h5>
                         </Col>
                       </Row>
                       <Row className="bordercolor">
@@ -685,7 +728,9 @@ class Fprint extends React.Component {
                       </Row>
                       <Row className="bordercolor">
                         <Col>
-                          <h6>Treatment</h6>
+                          <h5>
+                            <b>Treatment</b>
+                          </h5>
                         </Col>
                       </Row>
                       <Row className="bordercolor">
@@ -693,7 +738,9 @@ class Fprint extends React.Component {
                       </Row>
                       <Row className="bordercolor">
                         <Col>
-                          <h6>Remarks</h6>
+                          <h5>
+                            <b>Remarks</b>
+                          </h5>
                         </Col>
                       </Row>
                       <Row className="bordercolor">
@@ -718,15 +765,13 @@ class Fprint extends React.Component {
                       <Col xs="4" className="bordercolor">
                         {pastIllness.name}
                       </Col>
-                      <Col className="bordercolor">
-                        <Label>
-                          Remarks:{" "}
-                          {pastIllness.remarks === "" ? (
-                            <Fragment>None</Fragment>
-                          ) : (
-                            pastIllness.remarks
-                          )}
-                        </Label>
+                      <Col xs="8" className="bordercolor">
+                        Remarks:{" "}
+                        {pastIllness.remarks === "" ? (
+                          <Fragment>None</Fragment>
+                        ) : (
+                          pastIllness.remarks
+                        )}
                       </Col>
                     </Row>
                   ))}
@@ -735,15 +780,13 @@ class Fprint extends React.Component {
                       <Col xs="4" className="bordercolor">
                         {famIllness.name}
                       </Col>
-                      <Col className="bordercolor">
-                        <Label>
-                          Remarks:{" "}
-                          {famIllness.remarks === "" ? (
-                            <Fragment>None</Fragment>
-                          ) : (
-                            famIllness.remarks
-                          )}
-                        </Label>
+                      <Col xs="8" className="bordercolor">
+                        Remarks:{" "}
+                        {famIllness.remarks === "" ? (
+                          <Fragment>None</Fragment>
+                        ) : (
+                          famIllness.remarks
+                        )}
                       </Col>
                     </Row>
                   ))}
@@ -752,10 +795,7 @@ class Fprint extends React.Component {
                   bloodType={this.state.bloodType}
                   immunization={this.state.immunization.map((immunization) => (
                     <Row>
-                      <Col xs="4" className="bordercolor">
-                        {immunization.name}
-                      </Col>{" "}
-                      <Col className="bordercolor"></Col>
+                      <Col className="bordercolor">{immunization.name}</Col>
                     </Row>
                   ))}
                   hospitalizations={this.state.hospitalizations.map(
@@ -780,15 +820,13 @@ class Fprint extends React.Component {
                       <Col xs="4" className="bordercolor">
                         {allergies.name}
                       </Col>
-                      <Col className="bordercolor">
-                        <Label>
-                          Remarks:{" "}
-                          {allergies.remarks === "" ? (
-                            <Fragment>None</Fragment>
-                          ) : (
-                            allergies.remarks
-                          )}
-                        </Label>
+                      <Col xs="8" className="bordercolor">
+                        Remarks:{" "}
+                        {allergies.remarks === "" ? (
+                          <Fragment>None</Fragment>
+                        ) : (
+                          allergies.remarks
+                        )}
                       </Col>
                     </Row>
                   ))}
@@ -797,15 +835,13 @@ class Fprint extends React.Component {
                       <Col xs="4" className="bordercolor">
                         {bodyArt.name}
                       </Col>
-                      <Col className="bordercolor">
-                        <Label>
-                          Remarks:{" "}
-                          {bodyArt.remarks === "" ? (
-                            <Fragment>None</Fragment>
-                          ) : (
-                            bodyArt.remarks
-                          )}
-                        </Label>
+                      <Col xs="8" className="bordercolor">
+                        Remarks:{" "}
+                        {bodyArt.remarks === "" ? (
+                          <Fragment>None</Fragment>
+                        ) : (
+                          bodyArt.remarks
+                        )}
                       </Col>
                     </Row>
                   ))}
@@ -814,26 +850,28 @@ class Fprint extends React.Component {
                       <Col xs="4" className="bordercolor">
                         {habits.name}
                       </Col>
-                      <Col className="bordercolor">
-                        <Label>
-                          Remarks:{" "}
-                          {habits.remarks === "" ? (
-                            <Fragment>None</Fragment>
-                          ) : (
-                            habits.remarks
-                          )}
-                        </Label>
+                      <Col xs="8" className="bordercolor">
+                        Remarks:{" "}
+                        {habits.remarks === "" ? (
+                          <Fragment>None</Fragment>
+                        ) : (
+                          habits.remarks
+                        )}
                       </Col>
                     </Row>
                   ))}
                   visualAcuity={this.state.visualAcuity.map((visualAcuity) => (
                     <Row>
-                      <Col xs="4" className="bordercolor">
+                      <Col xs="3" className="bordercolor">
                         {visualAcuity.name}
                       </Col>
-                      <Col className="bordercolor">OD: {visualAcuity.od}</Col>
-                      <Col className="bordercolor">OS: {visualAcuity.os}</Col>
-                      <Col className="bordercolor">
+                      <Col xs="3" className="bordercolor">
+                        OD: {visualAcuity.od}
+                      </Col>
+                      <Col xs="3" className="bordercolor">
+                        OS: {visualAcuity.os}
+                      </Col>
+                      <Col xs="3" className="bordercolor">
                         Date {visualAcuity.date}
                       </Col>
                     </Row>
@@ -842,7 +880,6 @@ class Fprint extends React.Component {
                   menarchAge={this.state.menarchAge}
                   mensDuration={this.state.mensDuration}
                   dysmennorrhea={this.state.dysmennorrhea}
-                  sex={this.state.sex}
                 />
               </div>
             </Container>

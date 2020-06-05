@@ -66,9 +66,7 @@ class Forgotpassword extends Component {
             marginLeft: "25%"
           }}
         >
-          <h2>
-            <b>Find your MedX Account</b>
-          </h2>
+          <h2 className="dataDesign">Find your MedX Account</h2>
           <Row>
             <Form onSubmit={this.send}>
               {this.state.msg ? (

@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Table,
-  DropdownToggle,
-  DropdownMenu,
-  Navbar,
-  DropdownItem
-} from "reactstrap";
+import { Table, DropdownToggle, DropdownMenu } from "reactstrap";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import Badge from "@material-ui/core/Badge";
 import { connect } from "react-redux";

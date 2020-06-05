@@ -3,6 +3,7 @@ const router = express.Router();
 const cryptoJS = require("crypto-js");
 const shortid = require("shortid");
 const { today, byteLength } = require("../../middleware/date");
+const { hwValidation } = require("../../middleware/validator");
 const auth = require("../../middleware/auth");
 const access = require("../../middleware/auth.access");
 const Web3 = require("web3");
@@ -208,7 +209,7 @@ const abi = [
 
 const contractInstance = new web3.eth.Contract(
   abi,
-  "0x311F0b756e558c289D3CC9bd7Fcf9962C2C03A17"
+  "0x49c9b14Fba0BA1F4d9c19D60872300FA69b4a8D6"
 );
 
 // User Model
@@ -276,6 +277,35 @@ router.post("/addRecord/:id", auth, access, (req, res) => {
     treatment,
     remarks
   } = req.body;
+
+  if (
+    !bloodPressure &&
+    !pulseRate &&
+    !respiratoryRate &&
+    !temperature &&
+    !heent &&
+    !heart &&
+    !lungs &&
+    !abdomen &&
+    !extremities &&
+    !completeBloodCount &&
+    !urinalysis &&
+    !fecalysis &&
+    !chestXray &&
+    !isihiraTest &&
+    !audio &&
+    !psychologicalExam &&
+    !drugTest &&
+    !hepatitisBTest &&
+    !complaints &&
+    !diagnosis &&
+    !treatment &&
+    !remarks
+  ) {
+    return res.status(404).json({
+      msg: "You cannot insert blank form. Please fill up the form"
+    });
+  }
   const record = {
     bloodPressure,
     pulseRate,
@@ -308,8 +338,8 @@ router.post("/addRecord/:id", auth, access, (req, res) => {
     .insertRecord(req.params.id, recordId, ciphertext.toString())
     .send(
       {
-        from: "0x81975268F39D17EEF0a66B4EC45ccEE451346639",
-        gas: 6721975
+        from: "0x247EB95A0Ecb5B4b8CB087a6B86d050B552d93cB",
+        gas: 20000000000
       },
       function (err, result) {
         Patient.findById(req.params.id).then((patient) => {
@@ -385,6 +415,8 @@ router.post("/addRecord/:id", auth, access, (req, res) => {
 
 //Update Medical History
 router.post("/addHistory/:id", auth, access, (req, res) => {
+  const { error } = hwValidation(req.body);
+  if (error) return res.status(400).json({ msg: error.details[0].message });
   const activityLogs = (ciphertext) => {
     let size = byteLength(ciphertext.toString());
     Patient.findById(req.params.id).then((patient) => {
@@ -474,6 +506,25 @@ router.post("/addHistory/:id", auth, access, (req, res) => {
         visualAcuity
       } = req.body;
 
+      if (
+        pastIllness.length === 0 &&
+        famIllness.length === 0 &&
+        immunization.length === 0 &&
+        hospitalizations.length === 0 &&
+        operations.length === 0 &&
+        allergies.length === 0 &&
+        medication.length === 0 &&
+        !bloodType &&
+        !height &&
+        !weight &&
+        bodyArt.length === 0 &&
+        habits.length === 0 &&
+        visualAcuity.length === 0
+      ) {
+        return res.status(404).json({
+          msg: "You cannot insert blank form. Please fill up the form"
+        });
+      }
       const medHis = {
         pastIllness,
         famIllness,
@@ -499,8 +550,8 @@ router.post("/addHistory/:id", auth, access, (req, res) => {
       contractInstance.methods
         .insertMedicalHistory(req.params.id, medHisId, ciphertext.toString())
         .send({
-          from: "0x81975268F39D17EEF0a66B4EC45ccEE451346639",
-          gas: 6721975
+          from: "0x247EB95A0Ecb5B4b8CB087a6B86d050B552d93cB",
+          gas: 20000000000
         });
       activityLogs(ciphertext);
     } else if (patient.sex == "Female") {
@@ -523,6 +574,29 @@ router.post("/addHistory/:id", auth, access, (req, res) => {
         mensDuration,
         dysmennorrhea
       } = req.body;
+      if (
+        pastIllness.length === 0 &&
+        famIllness.length === 0 &&
+        immunization.length === 0 &&
+        hospitalizations.length === 0 &&
+        operations.length === 0 &&
+        allergies.length === 0 &&
+        medication.length === 0 &&
+        !bloodType &&
+        !height &&
+        !weight &&
+        bodyArt.length === 0 &&
+        habits.length === 0 &&
+        visualAcuity.length === 0 &&
+        !menarchYear &&
+        !menarchAge &&
+        !mensDuration &&
+        !dysmennorrhea
+      ) {
+        return res.status(404).json({
+          msg: "You cannot insert blank form. Please fill up the form"
+        });
+      }
 
       const medHis = {
         pastIllness,
@@ -552,8 +626,8 @@ router.post("/addHistory/:id", auth, access, (req, res) => {
       contractInstance.methods
         .insertMedicalHistory(req.params.id, medHisId, ciphertext.toString())
         .send({
-          from: "0x81975268F39D17EEF0a66B4EC45ccEE451346639",
-          gas: 6721975
+          from: "0x247EB95A0Ecb5B4b8CB087a6B86d050B552d93cB",
+          gas: 20000000000
         });
       activityLogs(ciphertext);
     }
@@ -614,7 +688,7 @@ router.get(
                   $each: [
                     ` ${clinician.firstName} ${
                       clinician.lastName
-                    } viewed your medical hitory: ${
+                    } viewed your medical history: ${
                       req.params.medHis
                     } at ${today()}`
                   ],
@@ -935,43 +1009,4 @@ router.get("/:id", auth, access, (req, res) => {
     );
 });
 
-// //TEST
-// const contractInstance = new web3.eth.Contract(
-//   abi,
-//   "0x49c9b14Fba0BA1F4d9c19D60872300FA69b4a8D6"
-// );
-
-// //Update Medical History
-// router.post("/addHistory/:id/:medHis", (req, res) => {
-//   let medHisId = req.params.medHis;
-//   const { x } = req.body;
-
-//   const medHis = {
-//     x
-//   };
-
-//   // Encrypt medical history
-//   let ciphertext = cryptoJS.AES.encrypt(JSON.stringify(medHis), req.params.id);
-
-//   contractInstance.methods
-//     .insertMedicalHistory(req.params.id, medHisId, ciphertext.toString())
-//     .send({
-//       from: "0x247EB95A0Ecb5B4b8CB087a6B86d050B552d93cB",
-//       gas: 20000000000
-//     });
-//   res.json({});
-// });
-
-// // Get latest medical history
-// router.get("/getHistory/:id/:medHis", async (req, res) => {
-//   Patient.findById(req.params.id).then((patient) => {
-//     contractInstance.methods
-//       .getMedicalHistory(patient.id, req.params.medHis)
-//       .call((err, medHis) => {
-//         var bytes = cryptoJS.AES.decrypt(medHis.toString(), patient.id);
-//         var medHis = JSON.parse(bytes.toString(cryptoJS.enc.Utf8));
-//         return res.json({ medHis });
-//       });
-//   });
-// });
 module.exports = router;

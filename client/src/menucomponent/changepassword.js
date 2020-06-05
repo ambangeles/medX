@@ -73,7 +73,7 @@ class Password extends React.Component {
           <Col>
             <div className="title">
               <a href="/">
-                <img className="img2" src="/images/Medx.png" />
+                <img className="img2" src="/images/Medx.png" alt="Logo" />
               </a>
             </div>
           </Col>

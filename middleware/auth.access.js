@@ -14,7 +14,7 @@ function auth(req, res, next) {
     req.clinician = decoded;
     next();
   } catch (e) {
-    res.status(400).json({ msg: "Token is not valid 1" });
+    return res.status(400).json({ msg: "INVALID_TOKEN" });
   }
 }
 

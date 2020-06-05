@@ -12,7 +12,6 @@ import {
   Alert
 } from "reactstrap";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { Redirect } from "react-router-dom";
 
 class Password extends React.Component {
   state = {
@@ -57,7 +56,6 @@ class Password extends React.Component {
   render() {
     if (this.props.auth.msg === "UPDATE_PASSWORD_SUCCESS") {
       this.props.logout();
-      return <Redirect to="/" />;
     }
 
     return (

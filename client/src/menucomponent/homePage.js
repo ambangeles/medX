@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import {
   Row,
   Col,
@@ -152,6 +152,7 @@ class Homepage extends React.Component {
                   marginBottom: "10px"
                 }}
                 src="/images/tap.png"
+                alt="Clip art"
               />
               <h5>
                 <b>Accessibility and Convenience</b>
@@ -175,6 +176,7 @@ class Homepage extends React.Component {
                   marginBottom: "10px"
                 }}
                 src="/images/secure-data.png"
+                alt="Clip art"
               />
               <h5>
                 <b>Control and Privacy</b>
@@ -197,6 +199,7 @@ class Homepage extends React.Component {
                   marginBottom: "10px"
                 }}
                 src="/images/files-and-folders.png"
+                alt="Clip art"
               />
               <h5>
                 <b>
@@ -222,6 +225,7 @@ class Homepage extends React.Component {
                   marginBottom: "10px"
                 }}
                 src="/images/blockchain.png"
+                alt="Clip art"
               />
               <h5 style={{ marginBottom: "30px" }}>
                 <b>Blockchain Technology</b>
@@ -285,14 +289,20 @@ class Homepage extends React.Component {
                 <p
                   className="marginLeftFooter"
                   style={{
-                    textAlign: "center",
-                    marginRight: "25%"
+                    textAlign: "center"
                   }}
                 >
                   <NavLink onClick={this.toggle1}>
                     <b>Privacy Policy</b>
                   </NavLink>
-                  <hr />
+                </p>
+                <hr />
+                <p
+                  className="marginLeftFooter"
+                  style={{
+                    textAlign: "center"
+                  }}
+                >
                   <NavLink onClick={this.toggle2}>
                     <b>Terms and Condition</b>
                   </NavLink>
@@ -331,7 +341,7 @@ class Homepage extends React.Component {
                 color="secondary"
                 onClick={this.toggle2}
               >
-                Close
+                <b>Close</b>
               </Button>
             </ModalFooter>
           </Modal>
@@ -355,7 +365,7 @@ class Homepage extends React.Component {
                 color="secondary"
                 onClick={this.toggle1}
               >
-                Close
+                <b>Close</b>
               </Button>
             </ModalFooter>
           </Modal>

@@ -50,7 +50,7 @@ class Patient extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavbarBrand href="/">
-                <img className="img1" src="./medX.png" />
+                <img className="img1" src="./medX.png" alt="Logo" />
               </NavbarBrand>
             </Nav>
             <Nav navbar>
@@ -76,6 +76,7 @@ class Patient extends React.Component {
                         width: "30px",
                         height: "30px"
                       }}
+                      alt="Icon"
                     />
                   ) : (
                     <IoMdPerson

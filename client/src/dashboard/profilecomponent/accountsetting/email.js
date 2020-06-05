@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { sendEmail, updateEmail, logout } from "../../../actions/authActions";
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   Container,
@@ -10,8 +9,7 @@ import {
   Label,
   Input,
   Col,
-  Alert,
-  Row
+  Alert
 } from "reactstrap";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
@@ -62,7 +60,6 @@ class EmailAddress extends React.Component {
   render() {
     if (this.props.auth.msg === "UPDATE_EMAIL_SUCCESS") {
       this.props.logout();
-      return <Redirect to="/" />;
     }
 
     return (

@@ -62,9 +62,7 @@ class Login extends Component {
             marginTop: "5%"
           }}
         >
-          <h2 className="center">
-            <b>Log In to MedX</b>
-          </h2>
+          <h2 className="center dataDesign">Log In to MedX</h2>
           <Form onSubmit={this.onSubmit}>
             {this.state.msg ? (
               <Alert color="danger"> {this.state.msg}</Alert>

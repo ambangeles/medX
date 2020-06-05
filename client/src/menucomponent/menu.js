@@ -41,7 +41,7 @@ const Menu = (props) => {
           <Nav className="mr-auto" navbar>
             <NavItem>
               <NavbarBrand href="/">
-                <img className="img1" src="./medX.png" />
+                <img className="img1" src="./medX.png" alt="Logo" />
               </NavbarBrand>
             </NavItem>
           </Nav>

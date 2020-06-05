@@ -13,7 +13,6 @@ import {
 } from "reactstrap";
 import { setup, logout } from "../../actions/authActions";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 class POnestep extends Component {

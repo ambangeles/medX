@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { MdAddCircle } from "react-icons/md";
 import { FaMinus } from "react-icons/fa";
 import {
@@ -15,15 +15,18 @@ import {
   Label,
   CustomInput,
   NavLink,
-  Button
+  Button,
+  Alert
 } from "reactstrap";
 import uuid from "uuid";
 import { connect } from "react-redux";
 import { insertHistory } from "../../actions/blockchainActions";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { clearErrors } from "../../actions/errorActions";
 
 class InsertMedical extends React.Component {
   state = {
+    msg: "",
     loading: false,
     modal2: false,
     mumps: false,
@@ -381,7 +384,21 @@ class InsertMedical extends React.Component {
     }
   }
 
-  toggle2 = () => this.setState({ modal2: !this.state.modal2 });
+  componentDidUpdate(prevProps) {
+    const { error } = this.props;
+    if (error !== prevProps.error) {
+      if (error.id === "MEDHIS_INSERTED_FAIL") {
+        this.setState({ msg: error.msg.msg, loading: false });
+      } else {
+        this.setState({ msg: null });
+      }
+    }
+  }
+
+  toggle2 = () => {
+    this.setState({ modal2: !this.state.modal2 });
+    this.props.clearErrors();
+  };
 
   addEntries = () => {
     this.setState({
@@ -768,6 +785,7 @@ class InsertMedical extends React.Component {
       <Form>
         <Container>
           <h2 className="dataDesign">Update Medical History</h2>
+
           <Label>
             <h5 className="dataDesign">History of Past Illness</h5>
           </Label>
@@ -2632,6 +2650,9 @@ class InsertMedical extends React.Component {
                 <h2 className="dataDesign">Update Medical History?</h2>
               </ModalHeader>
               <ModalBody>
+                {this.state.msg ? (
+                  <Alert color="danger"> {this.state.msg}</Alert>
+                ) : null}
                 <h5>
                   You can't edit this medical history once you click update. Are
                   you sure?
@@ -2679,7 +2700,10 @@ class InsertMedical extends React.Component {
   }
 }
 const mapStateToProps = (state) => ({
-  medrec: state.medrec
+  medrec: state.medrec,
+  error: state.error
 });
 
-export default connect(mapStateToProps, { insertHistory })(InsertMedical);
+export default connect(mapStateToProps, { insertHistory, clearErrors })(
+  InsertMedical
+);

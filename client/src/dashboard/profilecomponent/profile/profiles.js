@@ -85,6 +85,7 @@ class Profile extends React.Component {
                       width: "150px",
                       height: "150px"
                     }}
+                    alt="Icon"
                   />
                 ) : (
                   <IoMdPerson

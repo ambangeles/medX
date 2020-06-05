@@ -10,8 +10,7 @@ import {
   Label,
   Input,
   Col,
-  Alert,
-  Row
+  Alert
 } from "reactstrap";
 import CircularProgress from "@material-ui/core/CircularProgress";
 

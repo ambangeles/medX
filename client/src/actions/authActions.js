@@ -82,8 +82,6 @@ export const selectOccupation = ({ occupation }) => (dispatch, getState) => {
     });
 };
 
-//END FOR CLINICIAN
-
 //Change the plan of patient
 export const changePlan = (plan) => (dispatch, getState) => {
   // Request body
@@ -249,10 +247,15 @@ export const sendEmail = (email) => (dispatch) => {
 };
 
 // Logout User
-export const logout = () => {
-  return {
-    type: LOGOUT_SUCCESS
-  };
+export const logout = () => (dispatch, getState) => {
+  // Request body
+  const body = JSON.stringify({});
+  axios.post("/api/logout", body, tokenConfig(getState)).then((res) =>
+    dispatch({
+      type: LOGOUT_SUCCESS,
+      payload: res.data
+    })
+  );
 };
 
 // Login User
@@ -429,6 +432,46 @@ export const firstStep = ({
     });
 };
 
+//First step of registration for clinician
+export const firstStepC = ({
+  firstName,
+  middleName,
+  lastName,
+  birthMonth,
+  birthDay,
+  birthYear,
+  sex,
+  email,
+  password,
+  confirmPassword
+}) => (dispatch, getState) => {
+  const body = JSON.stringify({
+    firstName,
+    middleName,
+    lastName,
+    birthMonth,
+    birthDay,
+    birthYear,
+    sex,
+    email,
+    password,
+    confirmPassword
+  });
+
+  axios
+    .post("/api/firstStepC", body, tokenConfig(getState))
+    .then((res) =>
+      dispatch({
+        type: FIRST_STEP_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch((err) => {
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "FIRST_STEP_FAIL")
+      );
+    });
+};
 //match Code
 export const matchCode = (code, inputCode) => (dispatch) => {
   const config = {

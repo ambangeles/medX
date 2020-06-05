@@ -19,8 +19,7 @@ import { connect } from "react-redux";
 import {
   view,
   firstHistory,
-  allCRecords,
-  share
+  allCRecords
 } from "../../actions/blockchainActions";
 import Printmodal from "./printmodal";
 
@@ -83,6 +82,7 @@ class Profile extends React.Component {
                       width: "150px",
                       height: "150px"
                     }}
+                    alt="Icon"
                   />
                 ) : (
                   <IoMdPerson

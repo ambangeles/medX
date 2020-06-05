@@ -7,7 +7,6 @@ import {
   Col,
   Modal,
   ModalBody,
-  ModalHeader,
   ModalFooter,
   Button
 } from "reactstrap";
@@ -147,17 +146,21 @@ class Records extends React.Component {
                         <Fragment>
                           <Row className="bordercolor">
                             <Col className="center1">
-                              <h3>CONSULTATION RECORDS</h3>
+                              <h2>CONSULTATION RECORDS</h2>
                             </Col>
                           </Row>
                           <Row className="bordercolor">
                             <Col>
-                              <h6>Physical Examination Findings</h6>
+                              <h5>
+                                <b>Physical Examination Findings</b>
+                              </h5>
                             </Col>
                           </Row>
                           <Row>
                             <Col className="bordercolor" xs="2">
-                              <h6>Vital Signs</h6>
+                              <h5>
+                                <b>Vital Signs</b>
+                              </h5>
                             </Col>
                             <Col className="bordercolor" xs="5">
                               <Col>
@@ -181,7 +184,9 @@ class Records extends React.Component {
                           </Row>
                           <Row>
                             <Col className="bordercolor">
-                              Physical Examination
+                              <h5>
+                                <b>Physical Examination</b>
+                              </h5>
                             </Col>
                             <Col className="bordercolor" xs="10">
                               <Row>
@@ -230,7 +235,9 @@ class Records extends React.Component {
                           </Row>
                           <Row>
                             <Col className="bordercolor">
-                              Laboratory Workups
+                              <h5>
+                                <b>Laboratory Workups</b>
+                              </h5>
                             </Col>
                             <Col className="bordercolor" xs="10">
                               <Row>
@@ -314,7 +321,9 @@ class Records extends React.Component {
                           </Row>
                           <Row className="bordercolor">
                             <Col>
-                              <h6>Complaints</h6>
+                              <h5>
+                                <b>Complaints</b>
+                              </h5>
                             </Col>
                           </Row>
                           <Row className="bordercolor">
@@ -324,7 +333,9 @@ class Records extends React.Component {
                           </Row>
                           <Row className="bordercolor">
                             <Col>
-                              <h6>Diagnosis</h6>
+                              <h5>
+                                <b>Diagnosis</b>
+                              </h5>
                             </Col>
                           </Row>
                           <Row className="bordercolor">
@@ -334,7 +345,9 @@ class Records extends React.Component {
                           </Row>
                           <Row className="bordercolor">
                             <Col>
-                              <h6>Treatment</h6>
+                              <h5>
+                                <b>Treatment</b>
+                              </h5>
                             </Col>
                           </Row>
                           <Row className="bordercolor">
@@ -344,7 +357,9 @@ class Records extends React.Component {
                           </Row>
                           <Row className="bordercolor">
                             <Col>
-                              <h6>Remarks</h6>
+                              <h5>
+                                <b>Remarks</b>
+                              </h5>
                             </Col>
                           </Row>
                           <Row className="bordercolor">

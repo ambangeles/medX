@@ -5,10 +5,8 @@ import {
   Table,
   Row,
   Col,
-  Label,
   Modal,
   ModalBody,
-  ModalHeader,
   ModalFooter,
   Button
 } from "reactstrap";
@@ -151,15 +149,13 @@ class MedicalHistory extends React.Component {
                             <Col xs="4" className="bordercolor">
                               {pastIllness.name}
                             </Col>
-                            <Col className="bordercolor">
-                              <Label>
-                                Remarks:{" "}
-                                {pastIllness.remarks === "" ? (
-                                  <Fragment>None</Fragment>
-                                ) : (
-                                  pastIllness.remarks
-                                )}
-                              </Label>
+                            <Col xs="8" className="bordercolor">
+                              Remarks:{" "}
+                              {pastIllness.remarks === "" ? (
+                                <Fragment>None</Fragment>
+                              ) : (
+                                pastIllness.remarks
+                              )}
                             </Col>
                           </Row>
                         )
@@ -170,15 +166,13 @@ class MedicalHistory extends React.Component {
                             <Col xs="4" className="bordercolor">
                               {famIllness.name}
                             </Col>
-                            <Col className="bordercolor">
-                              <Label>
-                                Remarks:{" "}
-                                {famIllness.remarks === "" ? (
-                                  <Fragment>None</Fragment>
-                                ) : (
-                                  famIllness.remarks
-                                )}
-                              </Label>
+                            <Col xs="8" className="bordercolor">
+                              Remarks:{" "}
+                              {famIllness.remarks === "" ? (
+                                <Fragment>None</Fragment>
+                              ) : (
+                                famIllness.remarks
+                              )}
                             </Col>
                           </Row>
                         )
@@ -189,10 +183,9 @@ class MedicalHistory extends React.Component {
                       immunization={this.props.medrec.medHis.immunization.map(
                         (immunization) => (
                           <Row>
-                            <Col xs="4" className="bordercolor">
+                            <Col className="bordercolor">
                               {immunization.name}
                             </Col>{" "}
-                            <Col className="bordercolor"></Col>
                           </Row>
                         )
                       )}
@@ -225,15 +218,13 @@ class MedicalHistory extends React.Component {
                             <Col xs="4" className="bordercolor">
                               {allergies.name}
                             </Col>
-                            <Col className="bordercolor">
-                              <Label>
-                                Remarks:{" "}
-                                {allergies.remarks === "" ? (
-                                  <Fragment>None</Fragment>
-                                ) : (
-                                  allergies.remarks
-                                )}
-                              </Label>
+                            <Col xs="8" className="bordercolor">
+                              Remarks:{" "}
+                              {allergies.remarks === "" ? (
+                                <Fragment>None</Fragment>
+                              ) : (
+                                allergies.remarks
+                              )}
                             </Col>
                           </Row>
                         )
@@ -244,15 +235,13 @@ class MedicalHistory extends React.Component {
                             <Col xs="4" className="bordercolor">
                               {bodyArt.name}
                             </Col>
-                            <Col className="bordercolor">
-                              <Label>
-                                Remarks:{" "}
-                                {bodyArt.remarks === "" ? (
-                                  <Fragment>None</Fragment>
-                                ) : (
-                                  bodyArt.remarks
-                                )}
-                              </Label>
+                            <Col xs="8" className="bordercolor">
+                              Remarks:{" "}
+                              {bodyArt.remarks === "" ? (
+                                <Fragment>None</Fragment>
+                              ) : (
+                                bodyArt.remarks
+                              )}
                             </Col>
                           </Row>
                         )
@@ -263,30 +252,28 @@ class MedicalHistory extends React.Component {
                             {habits.name}
                           </Col>
                           <Col className="bordercolor">
-                            <Label>
-                              Remarks:{" "}
-                              {habits.remarks === "" ? (
-                                <Fragment>None</Fragment>
-                              ) : (
-                                habits.remarks
-                              )}
-                            </Label>
+                            Remarks:{" "}
+                            {habits.remarks === "" ? (
+                              <Fragment>None</Fragment>
+                            ) : (
+                              habits.remarks
+                            )}
                           </Col>
                         </Row>
                       ))}
                       visualAcuity={this.props.medrec.medHis.visualAcuity.map(
                         (visualAcuity) => (
                           <Row>
-                            <Col xs="4" className="bordercolor">
+                            <Col xs="3" className="bordercolor">
                               {visualAcuity.name}
                             </Col>
-                            <Col className="bordercolor">
+                            <Col xs="3" className="bordercolor">
                               OD: {visualAcuity.od}
                             </Col>
-                            <Col className="bordercolor">
+                            <Col xs="3" className="bordercolor">
                               OS: {visualAcuity.os}
                             </Col>
-                            <Col className="bordercolor">
+                            <Col xs="3" className="bordercolor">
                               Date {visualAcuity.date}
                             </Col>
                           </Row>

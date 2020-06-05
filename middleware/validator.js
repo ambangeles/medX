@@ -82,7 +82,11 @@ const setupValidation = (data) => {
       .messages({
         "string.pattern.base": `"Religion" should be letters only`
       }),
-    "Contact Number": Joi.number().required().integer(),
+    "Contact Number": Joi.string()
+      .pattern(new RegExp("^[+]*[-s./0-9]*$"))
+      .messages({
+        "string.pattern.base": `"Contact Number" must be valid`
+      }),
     "Guardian Name": Joi.string()
       .required()
       .pattern(new RegExp("^[a-zA-Z _]*$"))
@@ -97,7 +101,11 @@ const setupValidation = (data) => {
       .messages({
         "string.pattern.base": `"Relationship" should be letters only`
       }),
-    "Guardian Contact Number": Joi.number().required().integer()
+    "Guardian Contact Number": Joi.string()
+      .pattern(new RegExp("^[+]*[-s./0-9]*$"))
+      .messages({
+        "string.pattern.base": `"Guardian Contact Number" must be valid`
+      })
   });
 
   return schema.validate({
@@ -130,7 +138,11 @@ const editInfoValidation = (data) => {
       .messages({
         "string.pattern.base": `"Religion" should be letters only`
       }),
-    "Contact Number": Joi.number().required().integer(),
+    "Contact Number": Joi.string()
+      .pattern(new RegExp("^[+]*[-s./0-9]*$"))
+      .messages({
+        "string.pattern.base": `"Contact Number" must be valid`
+      }),
     "Guardian Name": Joi.string()
       .required()
       .pattern(new RegExp("^[a-zA-Z _]*$"))
@@ -145,7 +157,11 @@ const editInfoValidation = (data) => {
       .messages({
         "string.pattern.base": `"Relationship" should be letters only`
       }),
-    "Guardian Contact Number": Joi.number().required().integer()
+    "Guardian Contact Number": Joi.string()
+      .pattern(new RegExp("^[+]*[-s./0-9]*$"))
+      .messages({
+        "string.pattern.base": `"Guardian Contact Number" must be valid`
+      })
   });
 
   return schema.validate({
@@ -188,7 +204,11 @@ const editInfoCValidation = (data) => {
     "Birth Month": Joi.string().required(),
     "Birth Day": Joi.number().required().integer().min(1).max(31),
     "Birth Year": Joi.number().required().integer().min(1900).max(getYear()),
-    "Contact Number": Joi.number().required().integer()
+    "Contact Number": Joi.string()
+      .pattern(new RegExp("^[+]*[-s./0-9]*$"))
+      .messages({
+        "string.pattern.base": `"Contact Number" must be valid`
+      })
   });
 
   return schema.validate({
@@ -262,6 +282,34 @@ const resetValidation = (data) => {
   });
 };
 
+const hwValidation = (data) => {
+  const schema = Joi.object({
+    Height: Joi.string()
+      .allow("")
+      .pattern(new RegExp("^[0-9]+([.][0-9]+)?$"))
+      .messages({
+        "string.pattern.base": `"Height" must be a number`
+      }),
+    Weight: Joi.string()
+      .allow("")
+      .pattern(new RegExp("^[0-9]+([.][0-9]+)?$"))
+      .messages({
+        "string.pattern.base": `"Weight" must be a number`
+      }),
+    "Blood Type": Joi.string()
+      .allow("")
+      .pattern(new RegExp("^[a-z,A-Z][+|-]$"))
+      .messages({
+        "string.pattern.base": `"Blood Type" must be valid`
+      })
+  });
+  return schema.validate({
+    Height: data.height,
+    Weight: data.weight,
+    "Blood Type": data.bloodType
+  });
+};
+
 module.exports.registerValidation = registerValidation;
 module.exports.setupValidation = setupValidation;
 module.exports.editInfoValidation = editInfoValidation;
@@ -269,3 +317,4 @@ module.exports.editInfoCValidation = editInfoCValidation;
 module.exports.emailValidation = emailValidation;
 module.exports.passwordValidation = passwordValidation;
 module.exports.resetValidation = resetValidation;
+module.exports.hwValidation = hwValidation;

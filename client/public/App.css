@@ -430,7 +430,7 @@ input[type="remarks"] {
 .bordercolor {
   border-collapse: collapse !important;
   border: 1px solid black;
-  word-wrap: break-word;
+  word-wrap: break-word !important;
 }
 .bordercolor1 {
   border: 1px solid black;
@@ -439,7 +439,7 @@ input[type="remarks"] {
 }
 
 .divprint {
-  min-height: 150px;
+  min-height: 100px;
   width: 100%;
 }
 .divprint2 {
@@ -447,7 +447,7 @@ input[type="remarks"] {
   width: 100%;
 }
 .divprint1 {
-  min-height: 150px;
+  min-height: 10px;
   width: 100%;
 }
 

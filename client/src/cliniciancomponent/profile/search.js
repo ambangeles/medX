@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Container, Table, Row } from "reactstrap";
 import { connect } from "react-redux";
 import { search, getPermissionsC, view } from "../../actions/blockchainActions";
@@ -63,6 +63,7 @@ class Search extends React.Component {
                 width: "75%"
               }}
               src="medX.png"
+              alt="Logo"
             />
           </div>
         </Row>

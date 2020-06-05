@@ -418,6 +418,60 @@ router.post("/login", (req, res) => {
   });
 });
 
+//Login user
+router.post("/logout", auth, (req, res) => {
+  Patient.findById(req.user.id)
+    .select("-password")
+    .then((patient) => {
+      if (patient) {
+        Patient.findByIdAndUpdate(
+          patient.id,
+          {
+            $push: {
+              activityLogs: {
+                $each: [`Logged out at ${today()}`],
+                $position: 0
+              }
+            }
+          },
+          { safe: true },
+          function (err, doc) {
+            if (err) {
+              console.log(err);
+            }
+          }
+        );
+        return res.json({
+          msg: "LOGOUT_SUCCESS"
+        });
+      }
+      Clinician.findById(req.user.id)
+        .select("-password")
+        .then((clinician) => {
+          Clinician.findByIdAndUpdate(
+            clinician.id,
+            {
+              $push: {
+                activityLogs: {
+                  $each: [`Logged out at ${today()}`],
+                  $position: 0
+                }
+              }
+            },
+            { safe: true },
+            function (err, doc) {
+              if (err) {
+                console.log(err);
+              }
+            }
+          );
+          return res.json({
+            msg: "LOGOUT_SUCCESS"
+          });
+        });
+    });
+});
+
 //Send code to the given email address
 router.post("/sendEmail", (req, res) => {
   const { error } = emailValidation(req.body);
@@ -434,13 +488,13 @@ router.post("/sendEmail", (req, res) => {
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "core1810014@gmail.com",
-          pass: "TIP1810014"
+          user: "medXinformation@gmail.com",
+          pass: "Abcd1234!"
         }
       });
 
       const mailOptions = {
-        from: "core1810014@gmail.com",
+        from: "medXinformation@gmail.com",
         to: req.body.email,
         subject: "Email Verification",
         text: `Here is you code: ${code}`
@@ -458,19 +512,12 @@ router.post("/sendEmail", (req, res) => {
 router.post("/firstStep", (req, res) => {
   //Validation
   const { error } = registerValidation(req.body);
-  if (error) return res.status(400).json({ msg: error.details[0].message });
+  if (error)
+    return res.status(400).json({
+      msg: error.details[0].message
+    });
 
-  const {
-    firstName,
-    middleName,
-    lastName,
-    birthMonth,
-    birthDay,
-    birthYear,
-    sex,
-    email,
-    password
-  } = req.body;
+  const { birthMonth, birthDay, birthYear, sex, email, password } = req.body;
   const age = getAge(getMonth(birthMonth) + "/" + birthDay + "/" + birthYear);
   if (age <= 17) {
     return res.status(400).json({
@@ -478,10 +525,10 @@ router.post("/firstStep", (req, res) => {
     });
   }
 
-  const newPatient = {
-    firstName: capitalize(firstName),
-    middleName: capitalize(middleName),
-    lastName: capitalize(lastName),
+  const newUser = {
+    firstName: capitalize(req.body.firstName),
+    middleName: capitalize(req.body.middleName),
+    lastName: capitalize(req.body.lastName),
     birthMonth,
     birthDay,
     birthYear,
@@ -492,39 +539,142 @@ router.post("/firstStep", (req, res) => {
   };
 
   //Check for existing user
-  Patient.findOne({ email }).then((patient) => {
-    if (patient) return res.status(400).json({ msg: "Email already exists." });
-    Clinician.findOne({ email }).then((clinician) => {
-      if (clinician)
-        return res.status(400).json({ msg: "Email already exists." });
-      //Generate code and send to email
-      const code = Math.floor(100000 + Math.random() * 900000);
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: "core1810014@gmail.com",
-          pass: "TIP1810014"
-        }
+  const { firstName, middleName, lastName } = newUser;
+  Patient.find({
+    firstName,
+    middleName,
+    lastName,
+    birthDay,
+    birthMonth,
+    birthYear,
+    age
+  }).then((user) => {
+    if (user.length !== 0) {
+      return res.status(400).json({
+        msg: "User already exists"
       });
-      const mailOptions = {
-        from: "core1810014@gmail.com",
-        to: email,
-        subject: "Email Verification",
-        text: `Here is you code: ${code}`
-      };
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) console.log(error);
-        return res.json({
-          code,
-          patient: newPatient,
-          msg: "FIRST_STEP_SUCCESS"
+    }
+    Patient.findOne({ email }).then((patient) => {
+      if (patient)
+        return res.status(400).json({
+          msg: "Email already exists"
+        });
+      Clinician.findOne({ email }).then((clinician) => {
+        if (clinician)
+          return res.status(400).json({
+            msg: "Email already exists"
+          });
+        //Generate code and send to email
+        const code = Math.floor(100000 + Math.random() * 900000);
+        const transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: "medXinformation@gmail.com",
+            pass: "Abcd1234!"
+          }
+        });
+        const mailOptions = {
+          from: "medXinformation@gmail.com",
+          to: email,
+          subject: "Email Verification",
+          text: `Here is you code: ${code}`
+        };
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) console.log(error);
+          return res.json({
+            code,
+            user: newUser,
+            msg: "FIRST_STEP_SUCCESS"
+          });
         });
       });
     });
   });
 });
 
-// END OF NEW API
+//First step in registration
+router.post("/firstStepC", (req, res) => {
+  //Validation
+  const { error } = registerValidation(req.body);
+  if (error)
+    return res.status(400).json({
+      msg: error.details[0].message
+    });
+
+  const { birthMonth, birthDay, birthYear, sex, email, password } = req.body;
+  const age = getAge(getMonth(birthMonth) + "/" + birthDay + "/" + birthYear);
+  if (age <= 17) {
+    return res.status(400).json({
+      msg: "I'm sorry. Only users 18 years old and above can sign up"
+    });
+  }
+
+  const newUser = {
+    firstName: capitalize(req.body.firstName),
+    middleName: capitalize(req.body.middleName),
+    lastName: capitalize(req.body.lastName),
+    birthMonth,
+    birthDay,
+    birthYear,
+    age,
+    sex,
+    email,
+    password
+  };
+
+  //Check for existing user
+  const { firstName, middleName, lastName } = newUser;
+  Clinician.find({
+    firstName,
+    middleName,
+    lastName,
+    birthDay,
+    birthMonth,
+    birthYear,
+    age
+  }).then((user) => {
+    if (user.length !== 0) {
+      return res.status(400).json({
+        msg: "User already exists"
+      });
+    }
+    Patient.findOne({ email }).then((patient) => {
+      if (patient)
+        return res.status(400).json({
+          msg: "Email already exists"
+        });
+      Clinician.findOne({ email }).then((clinician) => {
+        if (clinician)
+          return res.status(400).json({
+            msg: "Email already exists"
+          });
+        //Generate code and send to email
+        const code = Math.floor(100000 + Math.random() * 900000);
+        const transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: "medXinformation@gmail.com",
+            pass: "Abcd1234!"
+          }
+        });
+        const mailOptions = {
+          from: "medXinformation@gmail.com",
+          to: email,
+          subject: "Email Verification",
+          text: `Here is you code: ${code}`
+        };
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) console.log(error);
+          return res.json({
+            code,
+            user: newUser,
+            msg: "FIRST_STEP_SUCCESS"
+          });
+        });
+      });
+    });
+  });
+});
 
 //Send code
 router.post("/sendLink", (req, res) => {
@@ -547,13 +697,13 @@ router.post("/sendLink", (req, res) => {
                 service: "gmail",
                 port: 587,
                 auth: {
-                  user: "core1810014@gmail.com",
-                  pass: "TIP1810014"
+                  user: "medXinformation@gmail.com",
+                  pass: "Abcd1234!"
                 }
               });
 
               let mailOptions = {
-                from: "core1810014@gmail.com",
+                from: "medXinformation@gmail.com",
                 to: req.body.email,
                 subject: "Email Verification",
                 text: `Here is your link to reset your password: \n http://localhost:3000/reset/${token}
@@ -583,13 +733,13 @@ router.post("/sendLink", (req, res) => {
             service: "gmail",
             port: 587,
             auth: {
-              user: "core1810014@gmail.com",
-              pass: "TIP1810014"
+              user: "medXinformation@gmail.com",
+              pass: "Abcd1234!"
             }
           });
 
           let mailOptions = {
-            from: "core1810014@gmail.com",
+            from: "medXinformation@gmail.com",
             to: req.body.email,
             subject: "Email Verification",
             text: `Here is your password reset link to reset your password: \n http://localhost:3000/reset/${token}

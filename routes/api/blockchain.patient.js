@@ -209,7 +209,7 @@ const abi = [
 
 const contractInstance = new web3.eth.Contract(
   abi,
-  "0x311F0b756e558c289D3CC9bd7Fcf9962C2C03A17"
+  "0x49c9b14Fba0BA1F4d9c19D60872300FA69b4a8D6"
 );
 
 // User Model
@@ -642,8 +642,6 @@ router.post("/cancelRequest/:clinician/:id", auth, (req, res) => {
   );
   return res.json({ msg: "CANCEL_REQUEST_SUCCESS" });
 });
-
-//END OF UPDATED API
 
 //Accept ClinicianToAccessPatient
 router.post("/accept/:clinicianId/:duration/:id", auth, (req, res) => {

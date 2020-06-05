@@ -5,9 +5,12 @@ function terms() {
   return (
     <Container>
       <div>
-        <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
-          <b>PRIVACY POLICY</b>
-        </h3>
+        <h2
+          className="dataDesign"
+          style={{ textAlign: "center", marginBottom: "10px" }}
+        >
+          PRIVACY POLICY
+        </h2>
         <br />
         <p>Effective Date: February 22, 2020</p>
         <p>

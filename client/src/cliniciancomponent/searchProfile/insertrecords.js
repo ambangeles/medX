@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import {
   Container,
   Row,
@@ -12,14 +12,17 @@ import {
   FormGroup,
   Label,
   NavLink,
-  Button
+  Button,
+  Alert
 } from "reactstrap";
 import { insertRecord } from "../../actions/blockchainActions";
 import { connect } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { clearErrors } from "../../actions/errorActions";
 
 class InsertMedicalRecords extends React.Component {
   state = {
+    msg: "",
     loading: false,
     modal2: false,
     bloodPressure: "",
@@ -56,7 +59,21 @@ class InsertMedicalRecords extends React.Component {
     });
   }
 
-  toggle2 = () => this.setState({ modal2: !this.state.modal2 });
+  componentDidUpdate(prevProps) {
+    const { error } = this.props;
+    if (error !== prevProps.error) {
+      if (error.id === "RECORD_INSERTED_FAIL") {
+        this.setState({ msg: error.msg.msg, loading: false });
+      } else {
+        this.setState({ msg: null });
+      }
+    }
+  }
+
+  toggle2 = () => {
+    this.setState({ modal2: !this.state.modal2 });
+    this.props.clearErrors();
+  };
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -484,6 +501,9 @@ class InsertMedicalRecords extends React.Component {
                 <h2 className="dataDesign">Insert Record?</h2>
               </ModalHeader>
               <ModalBody>
+                {this.state.msg ? (
+                  <Alert color="danger"> {this.state.msg}</Alert>
+                ) : null}
                 <h5>
                   You can't edit this record once you click insert. Are you
                   sure?
@@ -531,7 +551,10 @@ class InsertMedicalRecords extends React.Component {
   }
 }
 const mapStateToProps = (state) => ({
-  medrec: state.medrec
+  medrec: state.medrec,
+  error: state.error
 });
 
-export default connect(mapStateToProps, { insertRecord })(InsertMedicalRecords);
+export default connect(mapStateToProps, { insertRecord, clearErrors })(
+  InsertMedicalRecords
+);

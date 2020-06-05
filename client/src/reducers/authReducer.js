@@ -42,7 +42,6 @@ export default function (state = initialState, action) {
         ...action.payload
       };
     case LOGIN_FAIL:
-    case LOGOUT_SUCCESS:
       localStorage.removeItem("token");
       localStorage.removeItem("permissions");
       localStorage.removeItem("viewId");
@@ -63,6 +62,28 @@ export default function (state = initialState, action) {
         clinician: null,
         isAuthenticated: false,
         isLoading: false
+      };
+    case LOGOUT_SUCCESS:
+      localStorage.removeItem("token");
+      localStorage.removeItem("permissions");
+      localStorage.removeItem("viewId");
+      localStorage.removeItem("permission");
+      localStorage.removeItem("history");
+      localStorage.removeItem("shareToken");
+      localStorage.removeItem("medHis");
+      localStorage.removeItem("view");
+      localStorage.removeItem("code");
+      localStorage.removeItem("firstStep");
+      localStorage.removeItem("occupation");
+      localStorage.removeItem("medHisId");
+      return {
+        ...state,
+        ...action.payload,
+        token: null,
+        patient: null,
+        clinician: null,
+        isAuthenticated: false,
+        isLoading: true
       };
 
     case LOGIN_SUCCESS:
@@ -96,7 +117,7 @@ export default function (state = initialState, action) {
       };
     case FIRST_STEP_SUCCESS:
       localStorage.setItem("code", JSON.stringify(action.payload.code));
-      localStorage.setItem("firstStep", JSON.stringify(action.payload.patient));
+      localStorage.setItem("firstStep", JSON.stringify(action.payload.user));
       return {
         ...state,
         msg: action.payload.msg
@@ -110,7 +131,7 @@ export default function (state = initialState, action) {
         msg: action.payload.msg,
         patient: action.payload.patient
       };
-    //END
+
     case USER_LOADING:
       return {
         ...state,

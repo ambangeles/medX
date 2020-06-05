@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Row, Col, Container } from "reactstrap";
-import uuid from "uuid";
 
 class Fmedicalhistory extends React.Component {
   render() {
@@ -9,14 +8,16 @@ class Fmedicalhistory extends React.Component {
         <Container className="bordercolor3">
           <Row className="bordercolor">
             <Col className="center1">
-              <h3>MEDICAL HISTORY</h3>
+              <h2>MEDICAL HISTORY</h2>
             </Col>
           </Row>
           <Row>
             <Col>
               <Row className="bordercolor">
                 <Col>
-                  <h6>History of past Illness</h6>
+                  <h5>
+                    <b>History of past Illness</b>
+                  </h5>
                 </Col>
               </Row>
               <div className="divprint2">{this.props.pastIllness}</div>
@@ -24,7 +25,9 @@ class Fmedicalhistory extends React.Component {
           </Row>
           <Row className="bordercolor">
             <Col>
-              <h6> Family History of Illness</h6>
+              <h5>
+                <b>Family History of Illness</b>
+              </h5>
             </Col>
           </Row>
           {this.props.famIllness}
@@ -37,59 +40,75 @@ class Fmedicalhistory extends React.Component {
           </Row>
           <Row className="bordercolor">
             <Col>
-              <h6>Immunization</h6>
+              <h5>
+                <b>Immunization</b>
+              </h5>
             </Col>
           </Row>
           {this.props.immunization}
           <Row className="bordercolor">
             <Col>
-              <h6>Hospitalization</h6>
+              <h5>
+                <b>Hospitalization</b>
+              </h5>
             </Col>
           </Row>
           {this.props.hospitalizations}
           <Row className="bordercolor">
             <Col>
-              <h6>Operation</h6>
+              <h5>
+                <b>Operation</b>
+              </h5>
             </Col>
           </Row>
           {this.props.operations}
           <Row className="bordercolor">
             <Col>
-              <h6>Medical History</h6>
+              <h5>
+                <b>Medical History</b>
+              </h5>
             </Col>
           </Row>
           {this.props.medication}
           <Row className="bordercolor">
             <Col>
-              <h6>Allergies</h6>
+              <h5>
+                <b>Allergies</b>
+              </h5>
             </Col>
           </Row>
           {this.props.allergies}
           <Row className="bordercolor">
             <Col>
-              <h6>Body Art</h6>
+              <h5>
+                <b>Body Art</b>
+              </h5>
             </Col>
           </Row>
           {this.props.bodyArt}
           <Row className="bordercolor">
             <Col>
-              <h6>Pertubing Habit</h6>
+              <h5>
+                <b>Pertubing Habit</b>
+              </h5>
             </Col>
           </Row>
           {this.props.habits}
           <Row className="bordercolor">
             <Col>
-              <h6>Visual Acuity</h6>
+              <h5>
+                <b>Visual Acuity</b>
+              </h5>
             </Col>
           </Row>
           {this.props.visualAcuity}
-
           {this.props.sex === "Female" ? (
             <Fragment>
-              {" "}
               <Row className="bordercolor">
                 <Col>
-                  <h6>O.B Gyne History</h6>
+                  <h5>
+                    <b>O.B Gyne History</b>
+                  </h5>
                 </Col>
               </Row>
               <Row>

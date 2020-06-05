@@ -34,6 +34,7 @@ class Patients extends React.Component {
                                     width: "100px",
                                     height: "100px"
                                   }}
+                                  alt="Icon"
                                 />
                               </div>
                             ) : (
@@ -52,8 +53,8 @@ class Patients extends React.Component {
                               </div>
                             )}
                           </Col>
-                          <Col lg="8">
-                            <div className="display">
+                          <Col lg="9">
+                            <div className="display dataDesign">
                               {patientName} <b>&nbsp;|&nbsp;</b> {birthdate}
                             </div>
                           </Col>

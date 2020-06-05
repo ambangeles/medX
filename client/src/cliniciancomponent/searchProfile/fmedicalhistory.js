@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Row, Col, Container, Label } from "reactstrap";
+import { Row, Col, Container } from "reactstrap";
 import { connect } from "react-redux";
 import uuid from "uuid";
 
@@ -11,14 +11,14 @@ class Fmedicalhistory extends React.Component {
         <Container className="bordercolor3">
           <Row className="bordercolor">
             <Col className="center1">
-              <h3>MEDICAL HISTORY</h3>
+              <h2>MEDICAL HISTORY</h2>
             </Col>
           </Row>
           <Row>
             <Col>
               <Row className="bordercolor">
                 <Col>
-                  <h6>History of past Illness</h6>
+                  <b>History of Past Illness</b>
                 </Col>
               </Row>
               <div className="divprint2">
@@ -27,15 +27,13 @@ class Fmedicalhistory extends React.Component {
                     <Col xs="4" className="bordercolor">
                       {pastIllness.name}
                     </Col>
-                    <Col className="bordercolor">
-                      <Label>
-                        Remarks:{" "}
-                        {pastIllness.remarks === "" ? (
-                          <Fragment>None</Fragment>
-                        ) : (
-                          pastIllness.remarks
-                        )}
-                      </Label>
+                    <Col xs="8" className="bordercolor">
+                      Remarks:{" "}
+                      {pastIllness.remarks === "" ? (
+                        <Fragment>None</Fragment>
+                      ) : (
+                        pastIllness.remarks
+                      )}
                     </Col>
                   </Row>
                 ))}
@@ -46,7 +44,7 @@ class Fmedicalhistory extends React.Component {
             <Col>
               <Row className="bordercolor">
                 <Col>
-                  <h6>Family History of Illness</h6>
+                  <b>Family History of Illness</b>
                 </Col>
               </Row>
               <div className="divprint2">
@@ -55,15 +53,13 @@ class Fmedicalhistory extends React.Component {
                     <Col xs="4" className="bordercolor">
                       {famIllness.name}
                     </Col>
-                    <Col className="bordercolor">
-                      <Label>
-                        Remarks:{" "}
-                        {famIllness.remarks === "" ? (
-                          <Fragment>None</Fragment>
-                        ) : (
-                          famIllness.remarks
-                        )}
-                      </Label>
+                    <Col xs="8" className="bordercolor">
+                      Remarks:{" "}
+                      {famIllness.remarks === "" ? (
+                        <Fragment>None</Fragment>
+                      ) : (
+                        famIllness.remarks
+                      )}
                     </Col>
                   </Row>
                 ))}
@@ -83,20 +79,17 @@ class Fmedicalhistory extends React.Component {
           </Row>
           <Row className="bordercolor">
             <Col>
-              <h6>Immunization</h6>
+              <b>Immunization</b>
             </Col>
           </Row>
           {this.props.medrec.medHis.immunization.map((immunization) => (
             <Row>
-              <Col xs="4" className="bordercolor">
-                {immunization.name}
-              </Col>{" "}
-              <Col className="bordercolor"></Col>
+              <Col className="bordercolor">{immunization.name}</Col>
             </Row>
           ))}
           <Row className="bordercolor">
             <Col>
-              <h6>Hospitalization</h6>
+              <b>Hospitalization</b>
             </Col>
           </Row>
           {this.props.medrec.medHis.hospitalizations.map((hospitalizations) => (
@@ -106,7 +99,7 @@ class Fmedicalhistory extends React.Component {
           ))}
           <Row className="bordercolor">
             <Col>
-              <h6>Operation</h6>
+              <b>Operation</b>
             </Col>
           </Row>
           {this.props.medrec.medHis.operations.map((operations) => (
@@ -116,7 +109,7 @@ class Fmedicalhistory extends React.Component {
           ))}
           <Row className="bordercolor">
             <Col>
-              <h6>Medical History</h6>
+              <b>Medical History</b>
             </Col>
           </Row>
           {this.props.medrec.medHis.medication.map((medication) => (
@@ -126,7 +119,7 @@ class Fmedicalhistory extends React.Component {
           ))}
           <Row className="bordercolor">
             <Col>
-              <h6>Allergies</h6>
+              <b>Allergies</b>
             </Col>
           </Row>
           {this.props.medrec.medHis.allergies.map((allergies) => (
@@ -134,21 +127,19 @@ class Fmedicalhistory extends React.Component {
               <Col xs="4" className="bordercolor">
                 {allergies.name}
               </Col>
-              <Col className="bordercolor">
-                <Label>
-                  Remarks:{" "}
-                  {allergies.remarks === "" ? (
-                    <Fragment>None</Fragment>
-                  ) : (
-                    allergies.remarks
-                  )}
-                </Label>
+              <Col xs="8" className="bordercolor">
+                Remarks:{" "}
+                {allergies.remarks === "" ? (
+                  <Fragment>None</Fragment>
+                ) : (
+                  allergies.remarks
+                )}
               </Col>
             </Row>
           ))}
           <Row className="bordercolor">
             <Col>
-              <h6>Body Art</h6>
+              <b>Body Art</b>
             </Col>
           </Row>
           {this.props.medrec.medHis.bodyArt.map((bodyArt) => (
@@ -156,21 +147,19 @@ class Fmedicalhistory extends React.Component {
               <Col xs="4" className="bordercolor">
                 {bodyArt.name}
               </Col>
-              <Col className="bordercolor">
-                <Label>
-                  Remarks:{" "}
-                  {bodyArt.remarks === "" ? (
-                    <Fragment>None</Fragment>
-                  ) : (
-                    bodyArt.remarks
-                  )}
-                </Label>
+              <Col xs="8" className="bordercolor">
+                Remarks:{" "}
+                {bodyArt.remarks === "" ? (
+                  <Fragment>None</Fragment>
+                ) : (
+                  bodyArt.remarks
+                )}
               </Col>
             </Row>
           ))}
           <Row className="bordercolor">
             <Col>
-              <h6>Pertubing Habit</h6>
+              <b>Pertubing Habit</b>
             </Col>
           </Row>
           {this.props.medrec.medHis.habits.map((habits) => (
@@ -178,39 +167,42 @@ class Fmedicalhistory extends React.Component {
               <Col xs="4" className="bordercolor">
                 {habits.name}
               </Col>
-              <Col className="bordercolor">
-                <Label>
-                  Remarks:{" "}
-                  {habits.remarks === "" ? (
-                    <Fragment>None</Fragment>
-                  ) : (
-                    habits.remarks
-                  )}
-                </Label>
+              <Col xs="8" className="bordercolor">
+                Remarks:{" "}
+                {habits.remarks === "" ? (
+                  <Fragment>None</Fragment>
+                ) : (
+                  habits.remarks
+                )}
               </Col>
             </Row>
           ))}
           <Row className="bordercolor">
             <Col>
-              <h6>Visual Acuity</h6>
+              <b>Visual Acuity</b>
             </Col>
           </Row>
           {this.props.medrec.medHis.visualAcuity.map((visualAcuity) => (
             <Row>
-              <Col xs="4" className="bordercolor">
+              <Col xs="3" className="bordercolor">
                 {visualAcuity.name}
               </Col>
-              <Col className="bordercolor">OD: {visualAcuity.od}</Col>
-              <Col className="bordercolor">OS: {visualAcuity.os}</Col>
-              <Col className="bordercolor">Date {visualAcuity.date}</Col>
+              <Col xs="3" className="bordercolor">
+                OD: {visualAcuity.od}
+              </Col>
+              <Col xs="3" className="bordercolor">
+                OS: {visualAcuity.os}
+              </Col>
+              <Col xs="3" className="bordercolor">
+                Date {visualAcuity.date}
+              </Col>
             </Row>
           ))}
           {this.props.medrec.view.sex === "Female" ? (
             <Fragment>
-              {" "}
               <Row className="bordercolor">
                 <Col>
-                  <h6>O.B Gyne History</h6>
+                  <b>O.B Gyne History</b>
                 </Col>
               </Row>
               <Row>
