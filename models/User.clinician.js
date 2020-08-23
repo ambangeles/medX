@@ -71,6 +71,10 @@ const ClinicianSchema = new Schema({
   ],
   isRequested: [
     { patientId: { type: String }, notificationId: { type: String } }
-  ]
+  ],
+  verified: {
+    type: Boolean,
+    default: false
+  }
 });
 module.exports = Clinician = mongoose.model("clinicians", ClinicianSchema);

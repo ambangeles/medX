@@ -243,4 +243,16 @@ router.get("/getNotifications", auth, (req, res) => {
     .then((patient) => res.json(patient));
 });
 
+//View clinician profile
+router.get("/viewProfile/:id", auth, (req, res) => {
+  Clinician.findById(req.params.id)
+    .select("-password")
+    .select("-activityLogs")
+    .select("-_id")
+    .select("-notifications")
+    .select("-isRequested")
+    .select("-photo")
+    .then((profile) => res.json(profile));
+});
+
 module.exports = router;

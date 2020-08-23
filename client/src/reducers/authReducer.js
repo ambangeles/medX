@@ -15,7 +15,13 @@ import {
   UPDATE_EMAIL_SUCCESS,
   UPDATE_PASSWORD_SUCCESS,
   CHANGE_PLAN_SUCCESS,
-  SELECT_OCCUPATION_SUCCESS
+  SELECT_OCCUPATION_SUCCESS,
+  VIEW_PROFILE_SUCCESS,
+  PATIENT_PROFILE_SUCCESS,
+  CLINICIAN_PROFILE_SUCCESS,
+  LOGOUT_ADMIN_SUCCESS,
+  DENY_SUCCESS,
+  ACCEPT_SUCCESS
 } from "../actions/types";
 
 const initialState = {
@@ -28,11 +34,16 @@ const initialState = {
   code: JSON.parse(localStorage.getItem("code")),
   register: JSON.parse(localStorage.getItem("register")),
   firstStep: JSON.parse(localStorage.getItem("firstStep")),
-  occupation: JSON.parse(localStorage.getItem("occupation"))
+  occupation: JSON.parse(localStorage.getItem("occupation")),
+  profile: null,
+  allPatients: null,
+  allClinicians: null
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case DENY_SUCCESS:
+    case ACCEPT_SUCCESS:
     case CHANGE_PLAN_SUCCESS:
     case UPDATE_PASSWORD_SUCCESS:
     case UPDATE_EMAIL_SUCCESS:
@@ -40,6 +51,24 @@ export default function (state = initialState, action) {
       return {
         ...state,
         ...action.payload
+      };
+
+    case VIEW_PROFILE_SUCCESS:
+      return {
+        ...state,
+        profile: action.payload.profile
+      };
+
+    case PATIENT_PROFILE_SUCCESS:
+      return {
+        ...state,
+        allPatients: action.payload.allPatients
+      };
+
+    case CLINICIAN_PROFILE_SUCCESS:
+      return {
+        ...state,
+        allClinicians: action.payload.allClinicians
       };
     case LOGIN_FAIL:
       localStorage.removeItem("token");
@@ -64,6 +93,8 @@ export default function (state = initialState, action) {
         isLoading: false
       };
     case LOGOUT_SUCCESS:
+    case LOGOUT_ADMIN_SUCCESS:
+    case SETUP_SUCCESS:
       localStorage.removeItem("token");
       localStorage.removeItem("permissions");
       localStorage.removeItem("viewId");
@@ -83,7 +114,8 @@ export default function (state = initialState, action) {
         patient: null,
         clinician: null,
         isAuthenticated: false,
-        isLoading: true
+        isLoading: true,
+        msg: action.payload.msg
       };
 
     case LOGIN_SUCCESS:
@@ -105,12 +137,6 @@ export default function (state = initialState, action) {
     case MATCH_CODE_SUCCESS:
     case UPLOAD_ICON_SUCCESS:
     case EDIT_INFO_SUCCESS:
-      return {
-        ...state,
-        msg: action.payload.msg
-      };
-    case SETUP_SUCCESS:
-      localStorage.removeItem("firstStep");
       return {
         ...state,
         msg: action.payload.msg

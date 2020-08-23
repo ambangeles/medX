@@ -17,7 +17,13 @@ import {
   EMAIL_SENT_SUCCESS,
   UPDATE_EMAIL_SUCCESS,
   UPDATE_PASSWORD_SUCCESS,
-  SELECT_OCCUPATION_SUCCESS
+  SELECT_OCCUPATION_SUCCESS,
+  VIEW_PROFILE_SUCCESS,
+  PATIENT_PROFILE_SUCCESS,
+  LOGOUT_ADMIN_SUCCESS,
+  CLINICIAN_PROFILE_SUCCESS,
+  DENY_SUCCESS,
+  ACCEPT_SUCCESS
 } from "./types";
 
 //Edit clinician information
@@ -258,6 +264,18 @@ export const logout = () => (dispatch, getState) => {
   );
 };
 
+// Logout Admin
+export const logoutAdmin = () => (dispatch, getState) => {
+  // Request body
+  const body = JSON.stringify({});
+  axios.post("/api/logoutAdmin", body, tokenConfig(getState)).then((res) =>
+    dispatch({
+      type: LOGOUT_ADMIN_SUCCESS,
+      payload: res.data
+    })
+  );
+};
+
 // Login User
 export const login = ({ email, password }) => (dispatch) => {
   // Headers
@@ -272,6 +290,36 @@ export const login = ({ email, password }) => (dispatch) => {
 
   axios
     .post("/api/login", body, config)
+    .then((res) =>
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch((err) => {
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "LOGIN_FAIL")
+      );
+      dispatch({
+        type: LOGIN_FAIL
+      });
+    });
+};
+
+// Login Admin
+export const loginAdmin = ({ email, password }) => (dispatch) => {
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  // Request body
+  const body = JSON.stringify({ email, password });
+
+  axios
+    .post("/api/loginAdmin", body, config)
     .then((res) =>
       dispatch({
         type: LOGIN_SUCCESS,
@@ -587,7 +635,7 @@ export const uploadRegisterC = (
     .post(`/api/uploadRegisterC/${data}`, formData, config)
     .then((res) =>
       dispatch({
-        type: UPLOAD_REGISTER_SUCCESS,
+        type: LOGOUT_SUCCESS,
         payload: res.data
       })
     )
@@ -622,12 +670,76 @@ export const loadUser = () => (dispatch, getState) => {
     });
 };
 
+//Get Notification
 export const getNotiC = (_id) => (dispatch, getState) => {
   axios
     .get(`/api/clinician/notification/${_id}`, tokenConfig(getState))
     .catch((err) => {
       dispatch(
         returnErrors(err.response.data, err.response.status, "NOTI_FAIL")
+      );
+    });
+};
+
+//View Profile of clinician
+export const viewProfile = (_id) => (dispatch, getState) => {
+  axios
+    .get(`/api/patient/viewProfile/${_id}`, tokenConfig(getState))
+    .then((res) =>
+      dispatch({
+        type: VIEW_PROFILE_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch((err) => {
+      dispatch(
+        returnErrors(
+          err.response.data,
+          err.response.status,
+          "VIEW_PROFILE_FAIL"
+        )
+      );
+    });
+};
+
+//View all Patient Profile
+export const allPatients = () => (dispatch, getState) => {
+  axios
+    .get(`/api/allPatients`, tokenConfig(getState))
+    .then((res) =>
+      dispatch({
+        type: PATIENT_PROFILE_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch((err) => {
+      dispatch(
+        returnErrors(
+          err.response.data,
+          err.response.status,
+          "PATIENT_PROFILE_FAIL"
+        )
+      );
+    });
+};
+
+//View all Clinician Profile
+export const allClinicians = () => (dispatch, getState) => {
+  axios
+    .get(`/api/allClinicians`, tokenConfig(getState))
+    .then((res) =>
+      dispatch({
+        type: CLINICIAN_PROFILE_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch((err) => {
+      dispatch(
+        returnErrors(
+          err.response.data,
+          err.response.status,
+          "CLINICIAN_PROFILE_FAIL"
+        )
       );
     });
 };
@@ -644,7 +756,6 @@ export const sendLink = (email) => (dispatch) => {
   const body = JSON.stringify({
     email
   });
-  console.log(body);
   axios
     .post(`/api/sendLink`, body, config)
     .then((res) =>
@@ -660,6 +771,86 @@ export const sendLink = (email) => (dispatch) => {
     });
 };
 //END
+
+//Deny account of patient
+export const denyPatient = (id, photo, email) => (dispatch, getState) => {
+  // Request body
+  const body = JSON.stringify({ id, photo, email });
+
+  axios
+    .post(`/api/denyPatient`, body, tokenConfig(getState))
+    .then((res) =>
+      dispatch({
+        type: DENY_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch((err) => {
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "DENY_FAIL ")
+      );
+    });
+};
+
+//accept account of patient
+export const acceptPatient = (id, email) => (dispatch, getState) => {
+  // Request body
+  const body = JSON.stringify({});
+
+  axios
+    .post(`/api/acceptPatient/${id}/${email}`, body, tokenConfig(getState))
+    .then((res) =>
+      dispatch({
+        type: ACCEPT_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch((err) => {
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "ACCEPT_FAIL ")
+      );
+    });
+};
+
+//Deny account of clinician
+export const denyClinician = (id, photo, email) => (dispatch, getState) => {
+  // Request body
+  const body = JSON.stringify({ id, photo, email });
+
+  axios
+    .post(`/api/denyClinician`, body, tokenConfig(getState))
+    .then((res) =>
+      dispatch({
+        type: DENY_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch((err) => {
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "DENY_FAIL ")
+      );
+    });
+};
+
+//accept account of clinician
+export const acceptClinician = (id, email) => (dispatch, getState) => {
+  // Request body
+  const body = JSON.stringify({});
+
+  axios
+    .post(`/api/acceptClinician/${id}/${email}`, body, tokenConfig(getState))
+    .then((res) =>
+      dispatch({
+        type: ACCEPT_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch((err) => {
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "ACCEPT_FAIL ")
+      );
+    });
+};
 
 //update password
 export const forgotPass = ({ newPassword, confirmPassword }, resetToken) => (

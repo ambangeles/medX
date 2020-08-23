@@ -6,12 +6,16 @@ import {
   Input,
   Container,
   Button,
-  Alert
+  Alert,
+  UncontrolledPopover,
+  PopoverHeader,
+  PopoverBody
 } from "reactstrap";
 import { connect } from "react-redux";
 import { uploadRegisterC } from "../../actions/authActions";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { FaArrowLeft } from "react-icons/fa";
+import { FaRegAddressCard } from "react-icons/fa";
 
 class CIdentity extends Component {
   state = {
@@ -52,9 +56,6 @@ class CIdentity extends Component {
   };
 
   render() {
-    if (this.props.auth.msg === "UPLOAD_REGISTER_SUCCESS") {
-      window.location.assign("/");
-    }
     return (
       <Container>
         <div className="bottom">
@@ -85,6 +86,7 @@ class CIdentity extends Component {
               <a href="/">Privacy Policy</a>.
             </FormText>
             <Button
+              id="PopoverFocus"
               color="primary"
               style={{
                 marginTop: "15px",
@@ -103,6 +105,24 @@ class CIdentity extends Component {
                 "Done"
               )}
             </Button>
+            <UncontrolledPopover
+              trigger="hover"
+              placement="bottom"
+              target="PopoverFocus"
+            >
+              <PopoverHeader>
+                <h2 style={{ marginBottom: "0px" }}>
+                  <b>Note!</b>
+                </h2>
+              </PopoverHeader>
+              <PopoverBody>
+                <FaRegAddressCard size="60px" className="floater" />
+                <h5>
+                  We will first verify your account. Once complete, You will be
+                  notified through email and you can now use your account!
+                </h5>
+              </PopoverBody>
+            </UncontrolledPopover>
           </Form>
           <Button
             color="primary"

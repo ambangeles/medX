@@ -27,7 +27,8 @@ const {
 // User Model
 const Clinician = require("../../models/User.clinician");
 const Patient = require("../../models/User.patient");
-
+const Admin = require("../../models/User.admin");
+const { getMaxListeners } = require("../../models/User.patient");
 let gfs;
 const conn = mongoose
   .set("useNewUrlParser", true)
@@ -170,6 +171,182 @@ router.post(
   }
 );
 
+//Deny Account of patient
+router.post("/denyPatient", auth, (req, res) => {
+  Patient.deleteOne({
+    _id: req.body.id
+  }).then(() => {
+    //Delete photo
+    gfs.remove(
+      {
+        filename: req.body.photo,
+        root: "uploads"
+      },
+      (err, gridStore) => {
+        if (err) {
+          return res.status(404).json({
+            msg: err
+          });
+        }
+      }
+    );
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      port: 587,
+      auth: {
+        user: "medxinformation@gmail.com",
+        pass: "Abcd1234!"
+      }
+    });
+
+    let mailOptions = {
+      from: "medxinformation@gmail.com",
+      to: req.body.email,
+      subject: "Email Verification",
+      text: `We are sorry, your account has been denied. Please try to make an account again and make sure to give our requirements. Thank you!`
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        return res.json({
+          msg: "DENY_SUCCESS"
+        });
+      }
+    });
+  });
+});
+
+//Accept Account of patient
+router.post("/acceptPatient/:id/:email", auth, (req, res) => {
+  Patient.findByIdAndUpdate(
+    req.params.id,
+    {
+      verified: true
+    },
+    function (err, result) {
+      if (err) {
+        console.log(err);
+      }
+    }
+  ).then(() => {
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      port: 587,
+      auth: {
+        user: "medxinformation@gmail.com",
+        pass: "Abcd1234!"
+      }
+    });
+
+    let mailOptions = {
+      from: "medxinformation@gmail.com",
+      to: req.params.email,
+      subject: "Email Verification",
+      text: `Congratulations! your account has been verified. You can now login to our website. Thank you!`
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        return res.json({
+          msg: "ACCEPT_SUCCESS"
+        });
+      }
+    });
+  });
+});
+
+//Deny Account of clinician
+router.post("/denyClinician", auth, (req, res) => {
+  Clinician.deleteOne({
+    _id: req.body.id
+  }).then(() => {
+    //Delete photo
+    gfs.remove(
+      {
+        filename: req.body.photo,
+        root: "uploads"
+      },
+      (err, gridStore) => {
+        if (err) {
+          return res.status(404).json({
+            msg: err
+          });
+        }
+      }
+    );
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      port: 587,
+      auth: {
+        user: "medxinformation@gmail.com",
+        pass: "Abcd1234!"
+      }
+    });
+
+    let mailOptions = {
+      from: "medxinformation@gmail.com",
+      to: req.body.email,
+      subject: "Email Verification",
+      text: `We are sorry, your account has been denied. Please try to make an account again and make sure to give our requirements. Thank you!`
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        return res.json({
+          msg: "DENY_SUCCESS"
+        });
+      }
+    });
+  });
+});
+
+//Accept Account of clinician
+router.post("/acceptClinician/:id/:email", auth, (req, res) => {
+  Clinician.findByIdAndUpdate(
+    req.params.id,
+    {
+      verified: true
+    },
+    function (err, result) {
+      if (err) {
+        console.log(err);
+      }
+    }
+  ).then(() => {
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      port: 587,
+      auth: {
+        user: "medxinformation@gmail.com",
+        pass: "Abcd1234!"
+      }
+    });
+
+    let mailOptions = {
+      from: "medxinformation@gmail.com",
+      to: req.params.email,
+      subject: "Email Verification",
+      text: `Congratulations! your account has been verified. You can now login to our website. Thank you!`
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        return res.json({
+          msg: "ACCEPT_SUCCESS"
+        });
+      }
+    });
+  });
+});
+
 //Get user data
 router.get("/userInfo", auth, (req, res) => {
   Patient.findById(req.user.id)
@@ -301,9 +478,7 @@ router.post("/uploadRegisterC/:data", upload.single("file"), (req, res) => {
           (err, token) => {
             if (err) throw err;
             return res.json({
-              token,
-              patient: Clinician,
-              msg: "UPLOAD_REGISTER_SUCCESS"
+              msg: "LOGOUT_SUCCESS"
             });
           }
         );
@@ -340,6 +515,13 @@ router.post("/login", (req, res) => {
       Patient.findOne({ email }).then((patient) => {
         if (!patient)
           return res.status(400).json({ msg: "User does not exist" });
+
+        if (patient.verified === false) {
+          return res.status(400).json({
+            msg:
+              "You're account is being verified. You will be notified through email if you can now use your account!"
+          });
+        }
         // Validate password for patient
         bcrypt.compare(password, patient.password).then((isMatch) => {
           if (!isMatch)
@@ -378,6 +560,12 @@ router.post("/login", (req, res) => {
         });
       });
     } else {
+      if (clinician.verified === false) {
+        return res.status(400).json({
+          msg:
+            "You're account is being verified. You will be notified through email if you can now use your account!"
+        });
+      }
       // Validate password for clinician
       bcrypt.compare(password, clinician.password).then((isMatch) => {
         if (!isMatch)
@@ -418,7 +606,58 @@ router.post("/login", (req, res) => {
   });
 });
 
-//Login user
+//Login admin
+router.post("/loginAdmin", (req, res) => {
+  const { email, password } = req.body;
+  // // Create admin account
+  // const newAdmin = new Admin({
+  //   email,
+  //   password
+  // });
+  // // Create salt & hash
+  // bcrypt.genSalt(10, (err, salt) => {
+  //   bcrypt.hash(newAdmin.password, salt, (err, hash) => {
+  //     if (err) throw err;
+  //     newAdmin.password = hash;
+  //     newAdmin.save().then((admin) => {
+  //       console.log(admin);
+  //     });
+  //   });
+  // });
+
+  // Simple validation
+  if (!email || !password)
+    return res.status(400).json({ msg: "Please enter all fields" });
+
+  Admin.findOne({ email }).then((admin) => {
+    if (admin) {
+      // Validate password for admin
+      bcrypt.compare(password, admin.password).then((isMatch) => {
+        if (!isMatch)
+          return res.status(400).json({
+            msg: "Invalid credentials"
+          });
+        jwt.sign(
+          { id: admin.id },
+          config.get("jwtSecret"),
+          { expiresIn: 3600 },
+          (err, token) => {
+            if (err) throw err;
+            return res.json({
+              msg: "LOGIN_SUCCESS",
+              token,
+              isAuthenticated: true
+            });
+          }
+        );
+      });
+    } else {
+      return res.status(400).json({ msg: "Invalid credentials" });
+    }
+  });
+});
+
+//Logout user
 router.post("/logout", auth, (req, res) => {
   Patient.findById(req.user.id)
     .select("-password")
@@ -488,13 +727,13 @@ router.post("/sendEmail", (req, res) => {
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "medXinformation@gmail.com",
+          user: "medxinformation@gmail.com",
           pass: "Abcd1234!"
         }
       });
 
       const mailOptions = {
-        from: "medXinformation@gmail.com",
+        from: "medxinformation@gmail.com",
         to: req.body.email,
         subject: "Email Verification",
         text: `Here is you code: ${code}`
@@ -569,12 +808,12 @@ router.post("/firstStep", (req, res) => {
         const transporter = nodemailer.createTransport({
           service: "gmail",
           auth: {
-            user: "medXinformation@gmail.com",
+            user: "medxinformation@gmail.com",
             pass: "Abcd1234!"
           }
         });
         const mailOptions = {
-          from: "medXinformation@gmail.com",
+          from: "medxinformation@gmail.com",
           to: email,
           subject: "Email Verification",
           text: `Here is you code: ${code}`
@@ -653,12 +892,12 @@ router.post("/firstStepC", (req, res) => {
         const transporter = nodemailer.createTransport({
           service: "gmail",
           auth: {
-            user: "medXinformation@gmail.com",
+            user: "medxinformation@gmail.com",
             pass: "Abcd1234!"
           }
         });
         const mailOptions = {
-          from: "medXinformation@gmail.com",
+          from: "medxinformation@gmail.com",
           to: email,
           subject: "Email Verification",
           text: `Here is you code: ${code}`
@@ -697,13 +936,13 @@ router.post("/sendLink", (req, res) => {
                 service: "gmail",
                 port: 587,
                 auth: {
-                  user: "medXinformation@gmail.com",
+                  user: "medxinformation@gmail.com",
                   pass: "Abcd1234!"
                 }
               });
 
               let mailOptions = {
-                from: "medXinformation@gmail.com",
+                from: "medxinformation@gmail.com",
                 to: req.body.email,
                 subject: "Email Verification",
                 text: `Here is your link to reset your password: \n http://localhost:3000/reset/${token}
@@ -733,13 +972,13 @@ router.post("/sendLink", (req, res) => {
             service: "gmail",
             port: 587,
             auth: {
-              user: "medXinformation@gmail.com",
+              user: "medxinformation@gmail.com",
               pass: "Abcd1234!"
             }
           });
 
           let mailOptions = {
-            from: "medXinformation@gmail.com",
+            from: "medxinformation@gmail.com",
             to: req.body.email,
             subject: "Email Verification",
             text: `Here is your password reset link to reset your password: \n http://localhost:3000/reset/${token}
@@ -801,6 +1040,33 @@ router.post("/reset", pass, (req, res) => {
         }
       });
     }
+  });
+});
+
+//View all patient profile
+router.get("/allPatients", auth, (req, res) => {
+  Patient.find({ verified: false }).then((allPatients) => {
+    if (allPatients.length !== 0) {
+      return res.json({ allPatients });
+    }
+    return res.json({ allPatients: null });
+  });
+});
+
+//View all clinician profile
+router.get("/allClinicians", auth, (req, res) => {
+  Clinician.find({ verified: false }).then((allClinicians) => {
+    if (allClinicians.length !== 0) {
+      return res.json({ allClinicians });
+    }
+    return res.json({ allClinicians: null });
+  });
+});
+
+//Logout Admin
+router.post("/logoutAdmin", auth, (req, res) => {
+  return res.json({
+    msg: "LOGOUT_ADMIN_SUCCESS"
   });
 });
 

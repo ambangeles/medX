@@ -9,11 +9,15 @@ import {
   NavLink,
   Form,
   Button,
-  Alert
+  Alert,
+  UncontrolledPopover,
+  PopoverHeader,
+  PopoverBody
 } from "reactstrap";
 import { setup, logout } from "../../actions/authActions";
 import { connect } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { FaRegAddressCard } from "react-icons/fa";
 
 class POnestep extends Component {
   state = {
@@ -110,9 +114,6 @@ class POnestep extends Component {
   };
 
   render() {
-    if (this.props.auth.msg === "SETUP_SUCCESS") {
-      window.location.assign("/");
-    }
     return (
       <Container>
         <div>
@@ -217,7 +218,7 @@ class POnestep extends Component {
                       </option>
                       <option>Single</option>
                       <option>Married</option>
-                      <option>Widowed</option>x`
+                      <option>Widowed</option>
                     </Input>
                   </FormGroup>
                 </Col>
@@ -289,6 +290,7 @@ class POnestep extends Component {
               </Row>
             </Container>
             <Button
+              id="PopoverFocus"
               color="primary"
               style={{
                 fontWeight: "bold",
@@ -306,7 +308,25 @@ class POnestep extends Component {
                 "Done"
               )}
             </Button>
-            <NavLink
+            <UncontrolledPopover
+              trigger="hover"
+              placement="bottom"
+              target="PopoverFocus"
+            >
+              <PopoverHeader>
+                <h2 style={{ marginBottom: "0px" }}>
+                  <b>Note!</b>
+                </h2>
+              </PopoverHeader>
+              <PopoverBody>
+                <FaRegAddressCard size="60px" className="floater" />
+                <h5>
+                  We will first verify your account. Once complete, You will be
+                  notified through email and you can now use your account!
+                </h5>
+              </PopoverBody>
+            </UncontrolledPopover>
+            {/* <NavLink
               style={{
                 float: "right",
                 color: "blue"
@@ -314,7 +334,7 @@ class POnestep extends Component {
               onClick={this.onClick}
             >
               <b>Logout</b>
-            </NavLink>
+            </NavLink> */}
           </Form>
         </div>
       </Container>
